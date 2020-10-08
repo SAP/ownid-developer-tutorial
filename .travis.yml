@@ -14,6 +14,7 @@ branches:
   only:
   - master
   - develop
+  - alpha-rti
 
 language: node_js
 node_js:
@@ -26,35 +27,38 @@ jobs:
   include:
   - if: branch=master
     env: 
-      - ENV=staging 
+      ENV=staging 
+      DISTRIBUTIONID=
   - if: branch=develop
     env: 
-      - ENV=dev 
+      ENV=dev 
+      DISTRIBUTIONID=
+  - if: branch=alpha-rti
+    env: 
+      ENV=staging 
 
 install:
-- yarn
+  - yarn
 
 script:
-- sh scripts/set-build-num.sh $TRAVIS_BUILD_NUMBER
-- yarn build
+  - yarn build
 
 before_deploy:
-- pyenv global 3.7.1
-- pip install -U pip
-- pip install awscli
-- aws --version
-- "$(aws ecr get-login --region us-east-2 --no-include-email)"
+  - pyenv global 3.7.1
+  - pip install -U pip
+  - pip install awscli
+  - aws --version
+  - $(aws ecr get-login --region us-east-2 --no-include-email)
+
 deploy:
-- provider: script
-  script: sh scripts/deploy.sh $ENV $WEBAPP_DISTRIBUTIONID $PWL_DISTRIBUTIONID
-  skip_cleanup: true
-  on:
-    all_branches: true
-    condition: "$TRAVIS_BRANCH =~ ^(develop|master)$"
-- provider: script
-  script: sh scripts/publish-prod.sh
-  skip_cleanup: true
-  on:
-    branch: alpha-rti
-after_deploy:
-- bash scripts/test_runner.sh webapp $ENV
+  - provider: script
+    script: sh scripts/deploy.sh $ENV $DISTRIBUTIONID
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: "$TRAVIS_BRANCH =~ ^(develop|master)$"
+  - provider: script
+    script: sh scripts/publish-prod.sh
+    skip_cleanup: true
+    on:
+      branch: alpha-rti

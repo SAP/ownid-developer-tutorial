@@ -6,7 +6,7 @@
   "author": "SAP",
   "license": "MIT",
   "scripts": {
-    "start": "light-server -s docsify --historyindex '/index.html' -p 3000 "
+    "start": "light-server -s src --historyindex '/index.html' -p 3000 "
   },
   "devDependencies": {
     "light-server": "^2.8.0"

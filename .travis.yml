@@ -28,11 +28,11 @@ jobs:
   - if: branch=master
     env: 
       ENV=staging 
-      DISTRIBUTIONID=
+      DISTRIBUTIONID=E3NL8CQGIMG7IS
   - if: branch=develop
     env: 
       ENV=dev 
-      DISTRIBUTIONID=
+      DISTRIBUTIONID=E10S1IHXLQRRAJ
   - if: branch=alpha-rti
     env: 
       ENV=staging 

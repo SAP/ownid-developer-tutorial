@@ -6,7 +6,7 @@
   "author": "SAP",
   "license": "MIT",
   "scripts": {
-    "start": "light-server -s src --historyindex '/index.html' -p 3000 ",
+    "start": "light-server -s src --historyindex '/index.html' -p 3000 -w '*.md, src/** #echo reload the page' ",
     "build": "cp -R ./src/ ./dist/"
   },
   "devDependencies": {

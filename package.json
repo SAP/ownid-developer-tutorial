@@ -1,0 +1,15 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "main": "index.html",
+  "repository": "git@github.wdf.sap.corp:OwnID/docs.git",
+  "author": "SAP",
+  "license": "MIT",
+  "scripts": {
+    "start": "light-server -s src --historyindex '/index.html' -p 3000 -w '*.md, src/** #echo reload the page' ",
+    "build": "cp -R ./src/ ./dist/"
+  },
+  "devDependencies": {
+    "light-server": "^2.8.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "main": "index.html",
+  "repository": "git@github.wdf.sap.corp:OwnID/docs.git",
+  "author": "SAP",
+  "license": "MIT",
+  "scripts": {
+    "start": "light-server -s docsify --historyindex '/index.html' -p 3000 "
+  },
+  "devDependencies": {
+    "light-server": "^2.8.0"
+  }
+}

@@ -1,0 +1,60 @@
+sudo: required
+notifications:
+  slack:
+    on_success: never
+    on_failure: always
+    rooms:
+      secure: tZ6kIjN3IeY3VIsRkyEmRqps3xVmFmBEyvIJ1ciqBazJ4bxoXjeJC5WDytvdS/zVHwL1Icdzsx62oSa0D2qlH1lENRoEhomXz/kXuk6B+ZC8oVz/KoGz58gPlvaQtwOPis09yqpVs2AEO0ntO4+dYmznMJRtsygBZqqzFZdCwWRBs8kOi293JHnbK+wbF6mYa7Zfi8cv72qJeYdU3Sn7L1gpBlMItNhuyWCgqfZRiegBBrHYJq2BnoeyHKCPHPuGcYmBQy1TR+GGE+5gGn0Uh/fNOw7C1B2xmdq2Kxbz3HY4Ba8IlNwyy/e2CgyvWOWUFjXzp9+Z8pTuAtZsqNsbgbbpjbr0irohs3SbmoNY4jFWLIYgtoJWDFyMaWwYteqVEoPG21QLLkVHK60uMbQYLvrWK8edqvn9gzK3XafKops7Uc6ui8GGmBA3U8d+3/W14jyr39IEim3qZYdF3ZG+UPm1QM/TAM+7lTyQaFDlxe8wSwwig/0Ex5h7UdA++1AiuhWUklU3wK1DMaber2fczxqJMivGahed6kI9uHK5UXDZ/63JoMm5G2zz1ECJZR7U0KYmtRg2R6jAsomfKpTzlwX1RBbWhQ0Pp4j4d2eFydLmWSfKjru9h4vjzt0ftrpQ30p/B0KPU9xAxKJMirlX2w3ooG1wbUhT7BkPwFK7ITE=
+
+env:
+  global:
+  - PATH=$HOME/.local/bin:$PATH
+
+branches:
+  only:
+  - master
+  - develop
+
+language: node_js
+node_js:
+  - '12'
+cache:
+  directories:
+  - "./node_modules"
+
+jobs:
+  include:
+  - if: branch=master
+    env: 
+      - ENV=staging 
+  - if: branch=develop
+    env: 
+      - ENV=dev 
+
+install:
+- yarn
+
+script:
+- sh scripts/set-build-num.sh $TRAVIS_BUILD_NUMBER
+- yarn build
+
+before_deploy:
+- pyenv global 3.7.1
+- pip install -U pip
+- pip install awscli
+- aws --version
+- "$(aws ecr get-login --region us-east-2 --no-include-email)"
+deploy:
+- provider: script
+  script: sh scripts/deploy.sh $ENV $WEBAPP_DISTRIBUTIONID $PWL_DISTRIBUTIONID
+  skip_cleanup: true
+  on:
+    all_branches: true
+    condition: "$TRAVIS_BRANCH =~ ^(develop|master)$"
+- provider: script
+  script: sh scripts/publish-prod.sh
+  skip_cleanup: true
+  on:
+    branch: alpha-rti
+after_deploy:
+- bash scripts/test_runner.sh webapp $ENV

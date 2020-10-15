@@ -6,7 +6,7 @@
 
 > Passwords are finally gone.
 
-[Get Started](#ownid-for-developers)
+[Get Started](/introduction)
 [Demo Page](https://demo.ownid.com/)
 
 <!-- background color -->

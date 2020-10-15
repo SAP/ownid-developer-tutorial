@@ -1,0 +1,11 @@
+:root {
+    --sidebar-width: 25rem;
+    --base-font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+}
+
+@media (min-width: 48em)
+{
+  .sidebar-toggle .sidebar-toggle-button {
+      top: 8px;
+  }
+}

@@ -1,8 +1,9 @@
 - **Documentation**
 - [Introduction](introduction)
 - [Server SDK](server-sdk)
-- [SAP Customer Data Cloud Integration](gigya)
+- [Web UI SDK](frontend-sdk)
+- [Integrations](gigya)
 - [Troubleshooting](troubleshooting)
 - **Links**
-- [OwnID Official Site](https://ownid.com)
-- [OwnID Demo Site](https://demo.ownid.com)
+- [ownid.com](https://ownid.com)
+- [demo.ownid.com](https://demo.ownid.com)

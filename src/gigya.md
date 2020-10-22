@@ -1,9 +1,11 @@
-# SAP Customer Data Cloud Integration
+# Integrations
+
+## SAP Customer Data Cloud
 
 In order to integrate OwnID in your SAP Customer Data Cloud website, make sure you cover the following prerequisites:
 
 - Permissions to run the following Gigya REST API endpoints:
-  - accounts.setSchema
+  - accounts.setSchema  
   - accounts.setAccountInfo
   - accounts.getAccountInfo
   - accounts.notifyLogin
@@ -13,13 +15,13 @@ In order to integrate OwnID in your SAP Customer Data Cloud website, make sure y
 
 - Gigya console access (https://console.gigya.com/)
 
-## Generating Gigya Auth Keys
+### Generating Gigya Auth Keys
 
 Most REST API requests to Customer Data Cloud should be made securely, using an authentication mechanism. Using an application key and secret is one of the recommended methods by SAP Customer Data Cloud and requires creating an application on the Console, that is associated with a permission group.
 
 To generate an application key and secret to allow OwnID to perform REST API requests to SAP Customer Data Cloud, please check the instructions [here](https://developers.gigya.com/display/GD/Signing+Requests+to+SAP+Customer+Data+Cloud#SigningRequeststoSAPCustomerDataCloud-ApplicationandUserKeys).
 
-## Configuring Gigya Schema
+### Configuring Gigya Schema
 
 For proper OwnId functioning, the following fields should be created in the Gigya schema object, with the namespace **data.ownIdConnections**:
 
@@ -47,11 +49,11 @@ Inside the postman collection, you will find some variables you need to replace.
 | {{userKey}}     | Gigya User or Application Key      |  
 | {{secret}}      | Gigya User or Application Secret      |  
 
-## Set Default ScreenSets
+### Set Default ScreenSets
 
 To select the default "RegistrationLogin" screen-set you wish to use in web and mobile, please follow [this](https://developers.gigya.com/display/GD/Policies#Policies-DefaultLoginandRegistrationScreen-Set) instructions.
 
-## Initialize OwnID SDK
+### Initialize OwnID SDK
 
 Run `ownid.init` to initialize the widget in your Login, Registration, and Forget Password pages. example:
 
@@ -69,7 +71,7 @@ Run `ownid.init` to initialize the widget in your Login, Registration, and Forge
 </body>
 ```
 
-## Enabling JavaScript events
+### Enabling JavaScript events
 
 **NOTE**
 For this integration, you must use the UI Builder JavaScript events functionality in the Console.

@@ -1,6 +1,6 @@
 - **Documentation**
 - [Introduction](introduction)
-- [Server SDK](server-sdk)
+- [Server](server-sdk)
 - [Web UI SDK](frontend-sdk)
 - [Integrations](gigya)
 - [Troubleshooting](troubleshooting)

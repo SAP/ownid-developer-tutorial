@@ -19,15 +19,7 @@ Each route will be used by the OwnID UI SDK or OwnID Web Application.
 The configuration can be set manually by editing file [path to yaml file] or by running the configuration tool located in [path to configuration tool]
 
 
-## Installation
-
-!> **Important!** In case you are using the OwnID hosted solution you don't have to implement anything written in this section. The document refers to customers who intend to host the OwnID server SDK.
-
-### Docker Container
-
-The idea is to provide a docker container
-
-### YAML Configuration File
+YAML configuration file
 
 ```yaml
 apiVersion: apps/v1

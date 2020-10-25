@@ -8,6 +8,7 @@ The following steps will guide you to create a development environment running o
 The following steps refer to environment where OwnID host the server and Gigya is the Identity Management System.
 
 1. Hosted server
+
 OwnID person will ask you for some parameters. 
 
 Access to Gigya:
@@ -27,8 +28,8 @@ FIDO2 (biometric authentication):
 Follow the instructions for Gigya integration 
 
 4. Verify
-- See that OwnID widget is presented in your login/register pages
-- Test the scenarios in mobile and in desktop:
+See that OwnID widget is presented in your login/register pages.
+Test the scenarios in mobile and in desktop:
 * Register
 * Login
 * Can't login

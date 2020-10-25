@@ -16,7 +16,7 @@ Each route will be used by the OwnID UI SDK or OwnID Web Application.
 
 
 ## Development technology
-The server SDK is developed .NET Core 3.1.
+The server SDK is developed using .NET Core 3.1.
 
 
 ## Server configuration

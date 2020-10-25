@@ -87,3 +87,6 @@ spec:
             - name: ASPNETCORE_ENVIRONMENT # environment
               value: alpha
 ```
+
+## Server SDK
+### Implementing the SDK

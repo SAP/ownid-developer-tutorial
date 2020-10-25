@@ -19,7 +19,7 @@ Each route will be used by the OwnID UI SDK or OwnID Web Application.
 The configuration can be set manually by editing file [path to yaml file] or by running the configuration tool located in [path to configuration tool]
 
 
-YAML configuration file
+Yaml configuration file
 
 ```yaml
 apiVersion: apps/v1

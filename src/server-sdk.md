@@ -208,3 +208,62 @@ public void UseCacheStore<TStore>(ServiceLifetime serviceLifetime) where TStore 
 Where `TStore` is your custom store interaction implementation. It has primitive operations like set, find and remove. 
 The `ServiceLifetime` is enum the will describe it's lifecycle in injection mechanism.
 
+### Setting custom errors
+OwnID server SDK catch all unhandled exception. No unhandled exception is being transferred.
+
+In case then you need to validate some user inputs (for example, during registration process), you can use `IUserProfileFormContext`, which is being passed to all extension points which support custom error processing.
+
+#### `SetGeneralError`
+
+`SetGeneralError` should be used to provide general error, not related to any particular data provided by client
+
+`SetGeneralError` example
+
+```cs
+public class CustomUserProfile<TProfile> : IUserHandler<TProfile> where TProfile : class
+{
+    ...
+    public async Task UpdateProfileAsync(IUserProfileFormContext<TProfile> context)
+    {
+        ...
+        bool isValid = ValidateProfile(context.Profile, out var error);
+        if (!isValid)
+        {
+            context.SetGeneralError($"Profile is invalid: {error}");
+            return;
+        }
+        ...
+    }
+    ...
+}
+
+```
+
+#### `SetError`
+
+`SetError` method should be used to provide field specific error. It can be used at:
+
+* `IUserHandler.UpdateProfileAsync(IUserProfileFormContext<TProfile> context)`
+* `IAccountLinkHandler.OnLink(IUserProfileFormContext<TProfile> context)`
+
+`SetError` example
+
+```cs
+public class CustomUserProfile<TProfile> : IUserHandler<TProfile> where TProfile : class
+{
+    ...
+    public async Task UpdateProfileAsync(IUserProfileFormContext<TProfile> context)
+    {
+        ...
+        // check if email already exists
+        bool emailExists = IsEmailExists(userId: context.DID, email: context.Profile.Email);
+        if (emailExists)
+        {
+            context.SetError(profile => profile.Email, $"User with email '{context.Profile.Email}' already exists");
+        }
+        ...
+    }
+    ...
+}
+
+

@@ -157,3 +157,33 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
+### Advanced settings
+All configuration settings should be provided in AddOwnId(...) extension method on ConfigureServices application stage. Possible ways of the configuration tuning will be listed below.
+
+#### Configuration parameters
+Configuration parameters can either be set in appsettings.json (manually or using the configuration tool). The configuration tool get user input for all necessary parameters and set them in appsettings.json. Alternatively, use method `WithBaseSettings`.
+
+```cs
+public void WithBaseSettings([NotNull] Action<IOwnIdCoreConfiguration> modifyAction)
+```
+
+A list of these settings can be found in `IOwnIdCoreConfiguration` interface. We will describe them one by one below.
+
+* `Uri` **`OwnIdApplicationUrl`** - OwnId application URI that will be used for authorization. Required. Should use HTTPS in production environments. Should be accessible by OwinId application endpoint. HTTP can only be used for development cases with `IsDevEnvironment` set to `true`
+
+* `Uri` **`CallbackUrl`** -  Uri of OwnIdSdk host. Will be used for the entire OwnID challenge process. Required. Should use HTTPS on production environments. Should be accessible by OwinId application endpoint `OwnIdApplicationUrl`. HTTP can only be used for development cases with `IsDevEnvironment` set to `true`
+
+* `RSA` **`JwtSignCredentials`** - RSA keys for signing JWT token that will be provided for OwnId application requests. Required. You could use helper methods in configuration builder to set keys from file `public void SetKeys([NotNull] string publicKeyPath, [NotNull] string privateKeyPath)` or pass the object by itself `public void SetKeys([NotNull] RSA rsa)`.
+
+* `IProfileConfiguration` **`ProfileConfiguration`** - Profile form fields configuration. Should be set with `IUserHandler<T>` with 'UseUserHandlerWithCustomProfile<TProfile, THandler>()' method in configuration builder.
+
+* `string` **`DID`** - Organization/ product unique identity. Helps to identify your application on par with the public key from `JwtSignCredentials` 
+
+* `string` **`Name`** - Name of organization / product that will be shown to end user on OwinId application page on registration / login / managing profile.  Required.
+
+* `string` **`Icon`** - Icon of organization / product that will be shown to end user on OwinId application page on registration / login / managing profile. Can be stored as URI or base64 encoded format string (`data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==`)
+
+* `string` **`Description`** - Description text that will be shown near the `Name` on OwnId application page for end-user
+
+* `bool` **`IsDevEnvironment`** - Marks if OwnIdSdk is used for development cases
+

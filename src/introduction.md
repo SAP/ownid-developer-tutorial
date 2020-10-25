@@ -7,4 +7,6 @@ OwnID by SAP include the following components:
 * WebApp that run on the user mobile device
 * Server that communicate with the Identity Management System. The server can be created by the customer using OwnID SDK or OwnID can host a server for you
 
+Notice that OwnID does not store any data. The credentials are stored on the user’s mobile and the Identity Management System. 
+
 ![architecture](_media/ownid-how-it-works.png)

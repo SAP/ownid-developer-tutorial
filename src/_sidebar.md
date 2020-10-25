@@ -3,9 +3,9 @@
 - [Server](server-sdk)
 - [Web UI SDK](frontend-sdk)
 - [Integrations](gigya)
-- [Troubleshooting](troubleshooting)
 - [Deployment](deployment)
 - [Tutorial](tutorial)
+- [Troubleshooting](troubleshooting)
 - **Links**
 - [ownid.com](https://ownid.com)
 - [demo.ownid.com](https://demo.ownid.com)

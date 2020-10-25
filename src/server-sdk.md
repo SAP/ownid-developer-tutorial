@@ -1,6 +1,6 @@
-## About OwnID Server SDK
+## Server overview
 
-OwnId Server SDK together with OwnId UI SDK and OwnId Web Application are OwnId solution.
+The server communicates with the Identity Management System in order to authenticate the user with the cryptographic keys.
 
 The server SDK exposes `/ownid/*` routes.
 Each route will be used by the OwnID UI SDK or OwnID Web Application.
@@ -14,15 +14,12 @@ Each route will be used by the OwnID UI SDK or OwnID Web Application.
 * POST: `/ownid/{context}/approval-status` - checks approval status if PIN validation initiated
 * POST: `/ownid/{context}/approve` - sets approval resolution for current context
 
-## Installation
 
-!> **Important!** In case you are using the OwnID hosted solution you don't have to implement anything written in this section. The document refers to customers who intend to host the OwnID server SDK.
+## Server configuration
+The configuration can be set manually by editing file [path to yaml file] or by running the configuration tool located in [path to configuration tool]
 
-### Docker Container
 
-The idea is to provide a docker container
-
-### YAML Configuration File
+Yaml configuration file
 
 ```yaml
 apiVersion: apps/v1
@@ -90,3 +87,187 @@ spec:
             - name: ASPNETCORE_ENVIRONMENT # environment
               value: alpha
 ```
+
+## Server SDK
+### Implementing the SDK
+1. Create UserProfile class without any fields
+
+```cs
+public class UserProfile
+{
+}
+```
+
+2. Implement `IUserHandler<T>`
+Need to implement `UserHandler<T>` interface to integrate custom logic into the OwnId authorization process.
+You can create a parameterized constructor to get injected parameters. `IUserHandler<T>` instances have a `Transient` lifetime by default. Each method will be called after a user initiates any action (login, register, etc.)
+
+```cs
+public class UserHandler : IUserHandler<UserProfile>
+{
+    public Task UpdateProfileAsync(IUserProfileFormContext<UserProfile> context)
+    {
+        // some user update profile logic
+    }
+
+    public Task<LoginResult<object>> OnSuccessLoginAsync(string did)
+    {
+        // some user login logic
+    }
+}
+```
+
+3. Add OwnIdSdk services
+
+Go to `StartUp.cs`. Find `ConfigureServices` method and use `AddOwnId(...)` extension at the start to add mandatory services and attach already `UserProfile` and `UserHandler`.
+
+SetKeys method can be removed and also the following one, methodWithBaseSettings, if you set the fields in appsettings.json (manually or using the configuration tool). The configuration tool can either be used to create the key pair only or to get user input for all necessary parameters and set them in appsettings.json.
+
+```cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddOwnId( builder =>
+        {
+            // previously created UserProfile and UserHandler
+            builder.UseUserHandlerWithCustomProfile<UserProfile, UserHandler>();
+
+            // Adding RSA keys by path for JWT signing and application identification
+            builder.SetKeys("./keys/my-public-key.pub", "./keys/my-private-key");
+
+            // Set base settings
+            builder.WithBaseSettings(x =>
+            {
+                x.DID = "<your application unique identifier>"; // helps to identify your application
+                x.Name = "<your product name>"; // will be shown to users
+                x.CallbackUrl = new Uri("https://my-app.com"); // public Uri to this net core app
+                                                               // for sending login/register requests
+            });
+        });
+}
+```
+
+4. Add OwnIdSdk middleware
+
+Find `Configure` method in `StartUp.cs` and use `UseOwnId()` extension at the start to add register/login requests processors.
+
+```cs
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    app.UseOwnId();
+}
+```
+
+### Advanced settings
+All configuration settings should be provided in AddOwnId(...) extension method on ConfigureServices application stage. Possible ways of the configuration tuning will be listed below.
+
+#### Configuration parameters
+Configuration parameters can either be set in appsettings.json (manually or using the configuration tool). The configuration tool get user input for all necessary parameters and set them in appsettings.json. Alternatively, use method `WithBaseSettings`.
+
+```cs
+public void WithBaseSettings([NotNull] Action<IOwnIdCoreConfiguration> modifyAction)
+```
+
+A list of these settings can be found in `IOwnIdCoreConfiguration` interface. We will describe them one by one below.
+
+* `Uri` **`OwnIdApplicationUrl`** - OwnId application URI that will be used for authorization. Required. Should use HTTPS in production environments. Should be accessible by OwinId application endpoint. HTTP can only be used for development cases with `IsDevEnvironment` set to `true`
+
+* `Uri` **`CallbackUrl`** -  Uri of OwnIdSdk host. Will be used for the entire OwnID challenge process. Required. Should use HTTPS on production environments. Should be accessible by OwinId application endpoint `OwnIdApplicationUrl`. HTTP can only be used for development cases with `IsDevEnvironment` set to `true`
+
+* `RSA` **`JwtSignCredentials`** - RSA keys for signing JWT token that will be provided for OwnId application requests. Required. You could use helper methods in configuration builder to set keys from file `public void SetKeys([NotNull] string publicKeyPath, [NotNull] string privateKeyPath)` or pass the object by itself `public void SetKeys([NotNull] RSA rsa)`.
+
+* `IProfileConfiguration` **`ProfileConfiguration`** - Profile form fields configuration. Should be set with `IUserHandler<T>` with 'UseUserHandlerWithCustomProfile<TProfile, THandler>()' method in configuration builder.
+
+* `string` **`DID`** - Organization/ product unique identity. Helps to identify your application on par with the public key from `JwtSignCredentials` 
+
+* `string` **`Name`** - Name of organization / product that will be shown to end user on OwinId application page on registration / login / managing profile.  Required.
+
+* `string` **`Icon`** - Icon of organization / product that will be shown to end user on OwinId application page on registration / login / managing profile. Can be stored as URI or base64 encoded format string (`data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==`)
+
+* `string` **`Description`** - Description text that will be shown near the `Name` on OwnId application page for end-user
+
+* `bool` **`IsDevEnvironment`** - Marks if OwnIdSdk is used for development cases
+
+#### Localization settings
+All OwnIdSdk parts that require localization use `ILocalizationService` abstraction. 
+As for `OwnIdSdk.NetCore3.Web` we created its implementation called `LocalizationService`. It receives the text that should be localized and tries to find it as a key in the resource you define or in default OwnId localization. 
+To provide localization resource you can use:
+* `SetLocalizationResource` that sets custom localization resource (*.resx, etc.) by its type and name to be used in LocalizationService
+```cs
+public void SetLocalizationResource([NotNull] Type resourceType, [NotNull] string resourceName)
+```
+* `SetStringLocalizer` that sets IStringLocalizer to be used in LocalizationService
+```cs
+public void SetStringLocalizer<TLocalizer>() where TLocalizer : IStringLocalizer
+```
+
+#### Cache store settings
+OwnId SDK need a fast-reading store to place authorization temporary data. By default, it uses in-memory primitive store, but you can easily override this logic by implementing `ICacheStore` interface and registering its implementation in configuration builder with method `UseCacheStore`.
+```cs
+public void UseCacheStore<TStore>(ServiceLifetime serviceLifetime) where TStore : class, ICacheStore
+```
+Where `TStore` is your custom store interaction implementation. It has primitive operations like set, find and remove. 
+The `ServiceLifetime` is enum the will describe it's lifecycle in injection mechanism.
+
+### Setting custom errors
+OwnID server SDK catch all unhandled exception. No unhandled exception is being transferred.
+
+In case then you need to validate some user inputs (for example, during registration process), you can use `IUserProfileFormContext`, which is being passed to all extension points which support custom error processing.
+
+#### `SetGeneralError`
+
+`SetGeneralError` should be used to provide general error, not related to any particular data provided by client
+
+`SetGeneralError` example
+
+```cs
+public class CustomUserProfile<TProfile> : IUserHandler<TProfile> where TProfile : class
+{
+    ...
+    public async Task UpdateProfileAsync(IUserProfileFormContext<TProfile> context)
+    {
+        ...
+        bool isValid = ValidateProfile(context.Profile, out var error);
+        if (!isValid)
+        {
+            context.SetGeneralError($"Profile is invalid: {error}");
+            return;
+        }
+        ...
+    }
+    ...
+}
+
+```
+
+#### `SetError`
+
+`SetError` method should be used to provide field specific error. It can be used at:
+
+* `IUserHandler.UpdateProfileAsync(IUserProfileFormContext<TProfile> context)`
+* `IAccountLinkHandler.OnLink(IUserProfileFormContext<TProfile> context)`
+
+`SetError` example
+
+```cs
+public class CustomUserProfile<TProfile> : IUserHandler<TProfile> where TProfile : class
+{
+    ...
+    public async Task UpdateProfileAsync(IUserProfileFormContext<TProfile> context)
+    {
+        ...
+        // check if email already exists
+        bool emailExists = IsEmailExists(userId: context.DID, email: context.Profile.Email);
+        if (emailExists)
+        {
+            context.SetError(profile => profile.Email, $"User with email '{context.Profile.Email}' already exists");
+        }
+        ...
+    }
+    ...
+}
+
+```
+
+## Server container
+When using the container in your environment, you only need to set the configuration part. When OwnID host your container, OwnID will also set your configuration.
+

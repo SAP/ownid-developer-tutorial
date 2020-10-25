@@ -1,12 +1,11 @@
-# API Reference
+## API Reference
 
-## Methods
 
 ### init
 
 Initializes the widget and set general configurations.
 
-#### Config Properties
+Config Properties
 
 | Name | Required | Default Value | Description | 
 |---|---|---|---|
@@ -18,7 +17,7 @@ Initializes the widget and set general configurations.
 
 Renders widget. Returns [Ownid widget object](#widget-obj). 
 
-#### Config Properties
+Config Properties
 
 | Name | Required | Default Value | Description | 
 |---|---|---|---|
@@ -44,3 +43,58 @@ Destroys the current Ownid widget.
 ### update
 
 Updates Ownid widget with the new configurations.
+
+
+## Quick start to using the SDK
+1. Add a DOM container to the HTML
+
+Open HTML page you want to edit. Add an empty `<div>` tag to mark the spot where you want to display OwnId widget.
+
+```html
+<!-- ... existing HTML ... -->
+<div id="ownid"></div>
+<!-- ... existing HTML ... -->
+```
+Where `id="ownid"` allows to find Ownid container from the JavaScript code later and display Ownid widget inside of it.
+
+2. Add the Script Tag
+
+Add `<script>` tag to the HTML page right before the closing `</body>` tag
+
+```html
+  <!-- ... other HTML ... -->
+
+  <script async defer src="https://cdn.ownid.com/js/sdk.es5.js"></script>
+</body>
+```
+
+Or if you use Gigya, add `<script>` tag to the HTML page right before the closing `</body>` tag
+
+```html
+  <!-- ... other HTML ... -->
+
+  <script async defer src="https://cdn.ownid.com/js/gigya-sdk.es5.js"></script>
+</body>
+```
+
+3. Create Ownid widget
+
+Run `ownid.init` to init the widget and `ownid.render` to add Ownid widget to the page when the SDK is loaded, example:
+```html
+  <!-- ... other HTML ... -->
+  <script>
+    window.ownidAsyncInit = () => {
+      ownid.init(); 
+
+      ownid.render({
+         type: 'register',
+        element: document.querySelector('#ownid'),
+      }); 
+    }
+  </script>
+
+  <script async defer src="https://cdn.ownid.com/sdk.es5.js"></script>
+</body>
+```
+This code will add OwnId widget to the `#ownid` container
+

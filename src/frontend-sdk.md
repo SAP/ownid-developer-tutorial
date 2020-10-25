@@ -1,7 +1,7 @@
-# API Reference
+## API Reference
 
 
-## init
+### init
 
 Initializes the widget and set general configurations.
 
@@ -13,7 +13,7 @@ Config Properties
 | `language: string` | false | `'en'` | Language for the widget localisation |
 | `statusInterval: number` | false | 2000 | Interval in ms between status calls |
 
-## render
+### render
 
 Renders widget. Returns [Ownid widget object](#widget-obj). 
 
@@ -36,10 +36,11 @@ Config Properties
 | `onLink: function` | false | - | Callback for widget with type `link`. It will be called in an account linking scenario. |
 | `onError: function` | false | - | Callback for when an error occurs. |
 
-## destroy
+### destroy
 
 Destroys the current Ownid widget.
 
-## update
+### update
 
 Updates Ownid widget with the new configurations.
+

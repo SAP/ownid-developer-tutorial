@@ -187,7 +187,7 @@ A list of these settings can be found in `IOwnIdCoreConfiguration` interface. We
 
 * `bool` **`IsDevEnvironment`** - Marks if OwnIdSdk is used for development cases
 
-### Localization settings
+#### Localization settings
 All OwnIdSdk parts that require localization use `ILocalizationService` abstraction. 
 As for `OwnIdSdk.NetCore3.Web` we created its implementation called `LocalizationService`. It receives the text that should be localized and tries to find it as a key in the resource you define or in default OwnId localization. 
 To provide localization resource you can use:
@@ -200,7 +200,7 @@ public void SetLocalizationResource([NotNull] Type resourceType, [NotNull] strin
 public void SetStringLocalizer<TLocalizer>() where TLocalizer : IStringLocalizer
 ```
 
-### Cache store settings
+#### Cache store settings
 OwnId SDK need a fast-reading store to place authorization temporary data. By default, it uses in-memory primitive store, but you can easily override this logic by implementing `ICacheStore` interface and registering its implementation in configuration builder with method `UseCacheStore`.
 ```cs
 public void UseCacheStore<TStore>(ServiceLifetime serviceLifetime) where TStore : class, ICacheStore

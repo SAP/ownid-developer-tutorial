@@ -15,6 +15,10 @@ Each route will be used by the OwnID UI SDK or OwnID Web Application.
 * POST: `/ownid/{context}/approve` - sets approval resolution for current context
 
 
+## Development technology
+The server SDK is developed .NET Core 3.1.
+
+
 ## Server configuration
 The configuration can be set manually by editing file [path to yaml file] or by running the configuration tool located in [path to configuration tool]
 

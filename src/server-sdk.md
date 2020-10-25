@@ -1,6 +1,6 @@
-## About OwnID Server SDK
+## Server overview
 
-OwnId Server SDK together with OwnId UI SDK and OwnId Web Application are OwnId solution.
+The server communicates with the Identity Management System in order to authenticate the user with the cryptographic keys.
 
 The server SDK exposes `/ownid/*` routes.
 Each route will be used by the OwnID UI SDK or OwnID Web Application.
@@ -13,6 +13,11 @@ Each route will be used by the OwnID UI SDK or OwnID Web Application.
 * POST: `/ownid/status` - provides user login statuses with specific authorization contexts
 * POST: `/ownid/{context}/approval-status` - checks approval status if PIN validation initiated
 * POST: `/ownid/{context}/approve` - sets approval resolution for current context
+
+
+## Server configuration
+The configuration can be set manually by editing file [path to yaml file] or by running the configuration tool located in [path to configuration tool]
+
 
 ## Installation
 

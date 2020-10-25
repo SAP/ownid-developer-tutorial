@@ -1,7 +1,5 @@
-## Overview
-
 Welcome to the developer's guide and documentation portal of OwnID by SAP.
 
-Here we need to explain the high level overview of our architecture and complement that with a nice architecture diagram where we show clearly frontend, backend and the interactions between those components.
+OwnID by SAP offers a password-less login to your website. It is using cryptographic keys to replace the password that a user creates, and you store in the Identity Management System. The mobile phone becomes the user’s method of login as those cryptographic keys are stored on the user’s mobile.
 
 ![architecture](_media/ownid-how-it-works.png)

@@ -267,3 +267,6 @@ public class CustomUserProfile<TProfile> : IUserHandler<TProfile> where TProfile
 }
 
 
+## Server container
+When using the container in your environment, you only need to set the configuration part. When OwnID host your container, OwnID will also set your configuration.
+

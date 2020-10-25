@@ -90,3 +90,8 @@ spec:
 
 ## Server SDK
 ### Implementing the SDK
+1. Create UserProfile class without any fields
+2. Implement `IUserHandler<T>`
+Need to implement `UserHandler<T>` interface to integrate custom logic into the OwnId authorization process.
+You can create a parameterized constructor to get injected parameters. `IUserHandler<T>` instances have a `Transient` lifetime by default. Each method will be called after a user initiates any action (login, register, etc.)
+

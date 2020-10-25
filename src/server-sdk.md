@@ -91,7 +91,69 @@ spec:
 ## Server SDK
 ### Implementing the SDK
 1. Create UserProfile class without any fields
+
+```cs
+public class UserProfile
+{
+}
+```
+
 2. Implement `IUserHandler<T>`
 Need to implement `UserHandler<T>` interface to integrate custom logic into the OwnId authorization process.
 You can create a parameterized constructor to get injected parameters. `IUserHandler<T>` instances have a `Transient` lifetime by default. Each method will be called after a user initiates any action (login, register, etc.)
+
+```cs
+public class UserHandler : IUserHandler<UserProfile>
+{
+    public Task UpdateProfileAsync(IUserProfileFormContext<UserProfile> context)
+    {
+        // some user update profile logic
+    }
+
+    public Task<LoginResult<object>> OnSuccessLoginAsync(string did)
+    {
+        // some user login logic
+    }
+}
+```
+
+3. Add OwnIdSdk services
+
+Go to `StartUp.cs`. Find `ConfigureServices` method and use `AddOwnId(...)` extension at the start to add mandatory services and attach already `UserProfile` and `UserHandler`.
+
+SetKeys method can be removed and also the following one, methodWithBaseSettings, if you set the fields in appsettings.json (manually or using the configuration tool). The configuration tool can either be used to create the key pair only or to get user input for all necessary parameters and set them in appsettings.json.
+
+```cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddOwnId( builder =>
+        {
+            // previously created UserProfile and UserHandler
+            builder.UseUserHandlerWithCustomProfile<UserProfile, UserHandler>();
+
+            // Adding RSA keys by path for JWT signing and application identification
+            builder.SetKeys("./keys/my-public-key.pub", "./keys/my-private-key");
+
+            // Set base settings
+            builder.WithBaseSettings(x =>
+            {
+                x.DID = "<your application unique identifier>"; // helps to identify your application
+                x.Name = "<your product name>"; // will be shown to users
+                x.CallbackUrl = new Uri("https://my-app.com"); // public Uri to this net core app
+                                                               // for sending login/register requests
+            });
+        });
+}
+```
+
+4. Add OwnIdSdk middleware
+
+Find `Configure` method in `StartUp.cs` and use `UseOwnId()` extension at the start to add register/login requests processors.
+
+```cs
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    app.UseOwnId();
+}
+```
 

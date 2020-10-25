@@ -7,7 +7,7 @@ The following steps will guide you to create a development environment running o
 ## Productive environment
 The following steps refer to environment where OwnID host the server and Gigya is the Identity Management System.
 
-1. Set hosted server
+1. Hosted server
 OwnID person will ask you for some parameters. 
 
 Access to Gigya:

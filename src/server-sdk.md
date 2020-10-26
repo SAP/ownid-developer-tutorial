@@ -22,6 +22,28 @@ The server SDK is developed using .NET Core 3.1.
 ### When implementing the SDK
 When implementing the server SDK, the configuration is taken from appsettings.json or you can also set any parameter as an environment variable. Setting the parameters in appsettings.json can be either manually or using the configuration tool that will guide you per parameter.
 
+```
+  "ownid": {
+    "web_app_url": "https://sign.ownid.com",
+    "callback_url": "http://localhost:5002",
+    "pub_key": "./keys/jwtRS256.key.pub",
+    "private_key": "./keys/jwtRS256.key",
+    "did": "did:ownid:151850889514",
+    "name": "mozambiquehe.re",
+    "description": "Description here",
+    "cache_expiration": 600000,
+    "cache_type": "web-cache",
+    "cache_config": "localhost:6379",
+    "authentication_mode": "OwnIdOnly",
+    "fido2_passwordless_page_url": "",
+    "fido2_relying_party_id": "",
+    "fido2_relying_party_name": "",
+    "fido2_user_display_name": "",
+    "fido2_user_name": "",
+    "fido2_origin": ""
+  },
+```
+
 ### When using a docker container
 When your server is running in a docker container, you have to set the configuration in Yaml file as in the following example. However, when OwnID host your server you don't need to set any server configuration yourself.
 

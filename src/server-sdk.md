@@ -161,6 +161,10 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
+5. Can't login
+This refer to 'forgot password' flow. In the page of 'reset password' you can add OwnID widget to also offer password-less login at this point.
+
+
 ### Advanced settings
 All configuration settings should be provided in AddOwnId(...) extension method on ConfigureServices application stage. Possible ways of the configuration tuning will be listed below.
 

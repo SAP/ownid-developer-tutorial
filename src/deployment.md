@@ -23,6 +23,11 @@ FIDO2 (biometric authentication):
 - TBD
 
 2. CNAME
+URLs in the environment include:
+* company.com - your website
+* passwordless.company.com - where the customer register with phone lock mechanism
+* sign.ownid.com - OwnID webapp
+* company.ownid.com - hosted server
 
 3. UI integration
 Follow the instructions for Gigya integration 

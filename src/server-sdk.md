@@ -19,8 +19,11 @@ The server SDK is developed using .NET Core 3.1.
 
 
 ## Server configuration
-The configuration can be set manually by editing file [path to yaml file] or by running the configuration tool located in [path to configuration tool]
+### When implementing the SDK
+When implementing the server SDK, the configuration is taken from appsettings.json or you can also set any parameter as an environment variable. Setting the parameters in appsettings.json can be either manually or using the configuration tool that will guide you per parameter.
 
+### When using a docker container
+When your server is running in a docker container, you have to set the configuration in Yaml file as in the following example. However, when OwnID host your server you don't need to set any server configuration yourself.
 
 Yaml configuration file
 

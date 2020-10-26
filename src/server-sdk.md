@@ -188,7 +188,47 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 ```
 
 5. Can't login
-This refer to 'forgot password' flow. In the page of 'reset password' you can add OwnID widget to also offer password-less login at this point.
+
+This refer to 'forgot password' flow. When user open page 'reset password', they see OwnID widget to also offer password-less login at this point.
+In case you are using Gigya then this server functionality is already implemented.
+
+Required actions
+
+To enable recovery functionality, you need to
+
+1. [Implement `IAccountRecoveryHandler` interface](#-implement-iaccountrecoveryhandler-interface)
+1. [Enable Recovery feature](#enable-recovery-feature)
+
+#### Implement `IAccountRecoveryHandler` interface
+
+To inject your custom logic to recovery process, you need to implement `OwnIdSdk.NetCore3.Extensibility.Flow.Abstractions.IAccountRecoveryHandler` interface
+
+It contains 2 methods:
+
+* `RecoverAsync` - code which is being executed after user scan OwnID QR code or click on OwnID link (step 5). Must contains reset token validation logic. You can pass any required information from the client side within `payload` argument. Usually, it contains serialized object with reset account token which make it possible to identify the user who is going to reset access to account. Must returns user identifier and profile.
+* `OnRecoverAsync` - executing after OwnID generated new public key (step 7). Main purpose of this method is to reset old access credentials (OwnID public keys) and save newly generated public key to user profile to enable future authorization.
+
+#### Enable Recovery feature
+
+To enable Recovery feature, you need to call `builder.UseAccountRecovery` and pass class which implement interface as a type parameters at `Startup.ConfigureServices` method:
+
+```cs
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddOwnId(builder => {
+            ...
+            builder.UseAccountRecovery<CustomAccountRecoveryHandler>();
+            ...
+        });
+        ...
+    }
+}
+```
+
+Notice `CustomAccountRecoveryHandler` in the code example is custom implementation of `IAccountRecoveryHandler`
 
 
 ### Advanced settings

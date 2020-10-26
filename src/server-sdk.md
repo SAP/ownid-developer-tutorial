@@ -196,8 +196,8 @@ Required actions
 
 To enable recovery functionality, you need to
 
-1. [Implement `IAccountRecoveryHandler` interface](#-implement-iaccountrecoveryhandler-interface)
-1. [Enable Recovery feature](#enable-recovery-feature)
+1. Implement `IAccountRecoveryHandler` interface
+2. Enable Recovery feature
 
 #### Implement `IAccountRecoveryHandler` interface
 

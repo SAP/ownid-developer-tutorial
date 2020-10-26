@@ -12,22 +12,22 @@ The following steps refer to environment where OwnID host the server and Gigya i
 OwnID person will ask you for some parameters. 
 
 Access to Gigya:
-- Gigya API key and secret
+- Gigya API key, App/User key, and secret
 
 Application parameters presented in the WebApp:
 - Application name
 - Application description
 - Application icon
 
-FIDO2 (biometric authentication):
-- TBD
-
 2. CNAME
 URLs in the environment include:
 * company.com - your website
-* passwordless.company.com - where the customer register with phone lock mechanism
+* passwordless.company.com - FIDO2 page
 * sign.ownid.com - OwnID webapp
 * company.ownid.com - hosted server
+
+You have to create this CNAME (i.e. passwordless.company.com) and direct to a URL provided by OwnID.
+OwnID create a certificate that is set in AWS Cloud Front for this specific URL. In addition, OwnID also route requests to either the S3 bucket to get the JS file for the front-end or to the hosted server.
 
 3. UI integration
 Follow the instructions for Gigya integration 

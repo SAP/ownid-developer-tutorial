@@ -20,14 +20,18 @@ Application parameters presented in the WebApp:
 - Application icon
 
 2. CNAME
+
 URLs in the environment include:
 * company.com - your website
-* passwordless.company.com - FIDO2 page
+* passwordless.company.com - JavaScript file in S3 that being directed by CNAME
 * sign.ownid.com - OwnID webapp
 * company.ownid.com - hosted server
 
-You have to create this CNAME (i.e. passwordless.company.com) and direct to a URL provided by OwnID.
-OwnID create a certificate that is set in AWS Cloud Front for this specific URL. In addition, OwnID also route requests to either the S3 bucket to get the JS file for the front-end or to the hosted server.
+You have to create this CNAME (i.e. passwordless.company.com) and direct to a URL provided by OwnID. The steps are:
+* OwnID create a certificate that is set in AWS Cloud Front for this specific URL
+* You approve the certificate
+* OwnID create a CloudFront distribution 
+* You create the CNAME to direct to that distribution
 
 3. UI integration
 Follow the instructions for Gigya integration 

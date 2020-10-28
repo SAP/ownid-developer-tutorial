@@ -23,7 +23,9 @@ The server SDK is developed using .NET Core 3.1.
 | Parameter Name | Type | Value Example | Comments |
 |:-:|:-:|:-:|:-:|
 | callback_url | string | https://<client-name>.ownid.com |  |
-
+| pub_key | string | "./keys/jwtRS256.key.pub" | path to the public key. \nIn containers can be reference to an entry in the secure storage |
+| private_key | string | "./keys/jwtRS256.key" |  |
+  
 ### When implementing the SDK
 When implementing the server SDK, the configuration is taken from appsettings.json or you can also set any parameter as an environment variable. Setting the parameters in appsettings.json can be either manually or using the configuration tool that will guide you per parameter.
 

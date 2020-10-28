@@ -22,7 +22,7 @@ The server SDK is developed using .NET Core 3.1.
 
 | Parameter Name | Type | Value Example | Comments |
 |:-:|:-:|:-:|:-:|
-| callback_url | string | https://<client-name>.ownid.com |  |
+| callback_url | string | "https://<client-name>.ownid.com" |  |
 | pub_key | string | "./keys/jwtRS256.key.pub" | path to the public key. In containers can be reference to an entry in the secure storage |
 | private_key | string | "./keys/jwtRS256.key" |  |
   

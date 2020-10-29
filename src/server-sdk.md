@@ -47,6 +47,9 @@ The table explain the parameters you have to include in the configuration (wheth
 | fido2_user_display_name | string | passwordless | register as this user name |
 | fido2_user_name | string | passwordless | register as this user name |
 | fido2_origin | string | https://customer.com | website address |  
+  
+| Parameter Name | Type | Value Example | Comments |
+|:-:|:-:|:-:|:-:|  
 | data_center | string | us1.gigya.com | Gigya data center |  
 | secret | string |  | Gigya secret |  
 | api_key | string |  | Gigya API key |  
@@ -57,6 +60,13 @@ The table explain the parameters you have to include in the configuration (wheth
 Example for appsettings.json section:
 
 ```
+  "gigya": {
+    "login_type": "",
+    "secret": "",
+    "user_key": "",
+    "api_key": "",
+    "data_center": "",
+  },
   "ownid": {
     "web_app_url": "https://sign.ownid.com",
     "callback_url": "http://localhost:5002",

@@ -25,6 +25,13 @@ The server SDK is developed using .NET Core 3.1.
 | callback_url | string | "https://<client-name>.ownid.com" |  |
 | pub_key | string | "./keys/jwtRS256.key.pub" | path to the public key. In containers can be reference to an entry in the secure storage |
 | private_key | string | "./keys/jwtRS256.key" |  |
+| did | string | "did:ownid:151850889514" | unique string to identify your website |
+| name | string | "SAP" | the name that the user will see in OwnID WebApp |
+| description | string | "SAP SE" | the description that the user will see in OwnID WebApp |
+| icon | string | "" | icon base64 |
+| cache_expiration | number | 600000 | how long the cache can hold transaction data |
+| cache_type | string | "redis" | redis or in memory web-cache |
+| cache_config | string | "http://yourredis" | redis uri |
   
 ### When implementing the SDK
 When implementing the server SDK, the configuration is taken from appsettings.json or you can also set any parameter as an environment variable. Setting the parameters in appsettings.json can be either manually or using the configuration tool that will guide you per parameter.

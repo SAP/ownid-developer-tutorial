@@ -54,7 +54,7 @@ The table explain the parameters you have to include in the configuration (wheth
 | login_type | string | IdToken | session or IdToken (which is JWT) |  
   
   
-appsettings.json section:
+Example for appsettings.json section:
 
 ```
   "ownid": {

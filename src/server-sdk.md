@@ -20,6 +20,14 @@ The server SDK is developed using .NET Core 3.1.
 
 ## Server configuration
 
+Setting the configuration is relevant only if you implement the SDK or host the docker container yourself. When OwnID host the server, you have nothing to do.
+
+When implementing the server SDK, the configuration is taken from appsettings.json or you can also set any parameter as an environment variable. Setting the parameters in appsettings.json can be either manually or using the configuration tool that will guide you per parameter.
+
+When your server is running in a docker container, you have to set the configuration in Yaml file.
+
+The table explain the parameters you have to include in the configuration (whether it is appsettings.json or the Yaml file).
+
 | Parameter Name | Type | Value Example | Comments |
 |:-:|:-:|:-:|:-:|
 | callback_url | string | "https://<client-name>.ownid.com" |  |
@@ -41,9 +49,6 @@ The server SDK is developed using .NET Core 3.1.
 | fido2_origin | string | https://customer.com | website address |  
   
   
-### When implementing the SDK
-When implementing the server SDK, the configuration is taken from appsettings.json or you can also set any parameter as an environment variable. Setting the parameters in appsettings.json can be either manually or using the configuration tool that will guide you per parameter.
-
 appsettings.json section:
 
 ```
@@ -67,9 +72,6 @@ appsettings.json section:
     "fido2_origin": ""
   },
 ```
-
-### When using a docker container
-When your server is running in a docker container, you have to set the configuration in Yaml file as in the following example. However, when OwnID host your server you don't need to set any server configuration yourself.
 
 Yaml configuration file:
 

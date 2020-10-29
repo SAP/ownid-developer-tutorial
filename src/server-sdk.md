@@ -31,7 +31,15 @@ The server SDK is developed using .NET Core 3.1.
 | icon | string | "" | icon base64 |
 | cache_expiration | number | 600000 | how long the cache can hold transaction data |
 | cache_type | string | "redis" | redis or in memory web-cache |
-| cache_config | string | "http://yourredis" | redis uri |
+| cache_config | string | "http://yourredis" | redis uri. If not redis leave empty |
+| fido_enabled | boolean | true/false | FIDO2 enabled |
+| fido2_passwordless_page_url | string | https://passwordless.customer.com | passwordless URL |
+| fido2_relying_party_id | string | customer.com | customer website domain |
+| fido2_relying_party_name | string | customer | customer name |
+| fido2_user_display_name | string | passwordless | register as this user name |
+| fido2_user_name | string | passwordless | register as this user name |
+| fido2_origin | string | https://customer.com | website address |  
+  
   
 ### When implementing the SDK
 When implementing the server SDK, the configuration is taken from appsettings.json or you can also set any parameter as an environment variable. Setting the parameters in appsettings.json can be either manually or using the configuration tool that will guide you per parameter.

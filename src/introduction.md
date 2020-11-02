@@ -21,7 +21,7 @@ OwnID supported scenarios:
 * Can't login
 * Link account when user click OwnID widget in login page but did not register yet. In this scenario the user will be asked to enter password for the last time
 
-## Securing the credentials
+## Securing your credentials
 FIDO2 is a specification of the non-commercial FIDO Alliance which aim to eliminate passwords on the web. When FIDO2 is deployed the user is being asked to identify with the mechanism being used to lock the phone.
 
 With OwnID, when a user device found to support FIDO2 it will be used as the authentication method. In this scenario OwnID will use FIDO2 API in the JavaScript code. The public key is stored in the user profile in the Identity Management System.

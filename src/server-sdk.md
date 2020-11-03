@@ -11,7 +11,8 @@ The following sections will explain how to implement each of the three.
 
 
 ## Development technology
-The server SDK is developed using .NET Core 3.1.
+The server SDK is developed using .NET Core 3.1. 
+You have to take that in mind when considering to implement the SDK code.
 
 
 ## Server configuration

@@ -7,6 +7,8 @@ The server can be implemented in one of the following three options:
 - OwnID provide you with a docker container and you host it
 - OwnID provide you with SDK so you can integrate code into your website back-end
 
+The following sections will explain how to implement each of the three.
+
 
 ## Development technology
 The server SDK is developed using .NET Core 3.1.

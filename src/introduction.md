@@ -26,6 +26,6 @@ FIDO2 is a specification of the non-commercial FIDO Alliance which aim to elimin
 
 With OwnID, when a user device found to support FIDO2 it will be used as the authentication method. In this scenario OwnID will use FIDO2 API in the JavaScript code. The public key is stored in the user profile in the Identity Management System.
 
-When FIDO2 is not supported, key pair is created and stored encrypted in the mobile device browser storage. The public part of the key is stored in the user profile in the Identity Management System (similar to the public part of the FIDO2). In addition to encrypting the private key, OwnID notifies the user it is recommended to have the phone locked in case it is not.
+When FIDO2 is not supported, key pair is created and stored in the mobile device browser storage. The public part of the key is stored in the user profile in the Identity Management System (similar to the public part of the FIDO2). OwnID notifies the user it is recommended to have the phone locked in case it is not.
 
 

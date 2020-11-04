@@ -1,9 +1,4 @@
 
-## Developer environment
-The following steps will guide you to create a development environment running on your local machine.
-
-
-
 ## Productive environment
 The following steps refer to environment where OwnID host the server and Gigya is the Identity Management System.
 

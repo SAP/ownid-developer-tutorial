@@ -21,7 +21,7 @@ OwnID supported scenarios:
 * Can't login
 * Link account when user click OwnID widget in login page but did not register yet. In this scenario the user will be asked to enter password for the last time
 
-If your Identity System is SAP CDC (Gigya), follow the integration part 
+If your Identity System is SAP CDC (Gigya), follow the integration section. 
 
 
 ## Securing your credentials

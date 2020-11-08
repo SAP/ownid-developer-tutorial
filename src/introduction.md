@@ -21,7 +21,7 @@ OwnID supported scenarios:
 * Can't login
 * Link account when user click OwnID widget in login page but did not register yet. In this scenario the user will be asked to enter password for the last time
 
-If your Identity System is SAP CDC (Gigya), follow the integration part of the guide [here](/gigya#id=sap-customer-data-cloud)
+If your Identity System is SAP CDC (Gigya), follow the integration part of the guide [here](/gigya?id=sap-customer-data-cloud)
 
 ## Securing your credentials
 FIDO2 is a specification of the non-commercial FIDO Alliance which aim to eliminate passwords on the web. When FIDO2 is deployed the user is being asked to identify with the mechanism being used to lock the phone.

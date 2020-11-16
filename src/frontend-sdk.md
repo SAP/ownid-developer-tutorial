@@ -39,6 +39,44 @@ Config Properties
 | `onLink: function` | false | - | Callback for widget with type `link`. It will be called in an account linking scenario. |
 | `onError: function` | false | - | Callback for when an error occurs. |
 
+#### Inline widget
+
+Defines a configuration for Inline widget
+
+| Name | Required | Description | 
+|---|---|---|
+| `targetElement: HTMLInputElement` | true | Input Element where inline widget will be shown. E.q. password field |
+| `userIdElement: HTMLInputElement` | false | Used for login functionality to verify if user exists. E.q. email or username field |
+| `additionalElements: HTMLElement[]` | false | Array of elements which will be hidden after one of success callbacks will be called. E.q. confirm password field |
+| `offset: [number, number]` | false | - | Moves Inline widget by `[x, y]` px. E.q. [-10, 15] will move Inline widget for 10px left and 15px down |
+| `credentialsAutoFillButtonOffset:` `number` | false | Moves Safari's key icon. This param will be used as 'margin-right' for `-webkit-credentials-auto-fill-button` |
+
+#### Ownid Note
+
+Sets custom text to the note. You can hide it by setting `false` or `null` to this param. 
+
+| Name | Required | Description | 
+|---|---|---|
+| `text: string` | true | Defines text to show when Ownid completes its flow |
+| `wrapperElement: HTMLElement` | false | Wrapper for note |
+
+You can just set your custom text to `note` param instead of providing an object. E.q. `note: '<your custom text for note>'`.
+
+#### IUserHandler
+
+User handler used by Ownid in different flows. 
+E.q. `Login` flow uses `isUserExists` method to verify user by provided id to be able to link account with Ownid profile.
+
+User handler should be implemented by web master.
+It should provide set of functions from list below.
+
+Not required if you are using Gigya.
+
+| Name | Required | Description | 
+|---|---|---|
+| `isUserExists: function` | true | Function that checks user existence by user id (email, username, etc.). Returns `Promise<boolean>` |
+
+
 ### getOwnIDPayload
 
 Returns `Promise` with Ownid response from `onLogin` or other callback, depends on widget type.
@@ -67,44 +105,20 @@ Destroys the current Ownid widget.
 
 Updates Ownid widget with the new configurations.
 
-## Ownid Configurations
+Config Properties
 
-### Inline widget
-
-Defines a configuration for Inline widget
-
-| Name | Required | Description | 
-|---|---|---|
-| `targetElement: HTMLInputElement` | true | Input Element where inline widget will be shown. E.q. password field |
-| `userIdElement: HTMLInputElement` | false | Used for login functionality to verify if user exists. E.q. email or username field |
-| `additionalElements: HTMLElement[]` | false | Array of elements which will be hidden after one of success callbacks will be called. E.q. confirm password field |
-| `offset: [number, number]` | false | - | Moves Inline widget by `[x, y]` px. E.q. [-10, 15] will move Inline widget for 10px left and 15px down |
-| `credentialsAutoFillButtonOffset:` `number` | false | Moves Safari's key icon. This param will be used as 'margin-right' for `-webkit-credentials-auto-fill-button` |
-
-### Ownid Note
-
-Sets custom text to the note. You can hide it by setting `false` or `null` to this param. 
-
-| Name | Required | Description | 
-|---|---|---|
-| `text: string` | true | Defines text to show when Ownid completes its flow |
-| `wrapperElement: HTMLElement` | false | Wrapper for note |
-
-You can just set your custom text to `note` param instead of providing an object. E.q. `note: '<your custom text for note>'`.
-
-### IUserHandler
-
-User handler used by Ownid in different flows. 
-E.q. `Login` flow uses `isUserExists` method to verify user by provided id to be able to link account with Ownid profile.
-
-User handler should be implemented by web master.
-It should provide set of functions from list below.
-
-Not required if you are using Gigya.
-
-| Name | Required | Description | 
-|---|---|---|
-| `isUserExists: function` | true | Function that checks user existence by user id (email, username, etc.). Returns `Promise<boolean>` |
+| Name | Required | Default Value | Description | 
+|---|---|---|---|
+| `language: string` | false | `'en'` | Language for the widget localisation. Overrides general configuration for this widget |
+| `desktopTitle: string` | false | default string | Title of the widget for desktop |
+| `desktopSubtitle: string` | false | default string | Subtitle of the widget for desktop |
+| `statusInterval: number` | false | 2000 | Interval in ms between status calls. Overrides general configuration for this widget |
+| `data`: `{ pwrt: string }`| false | - | Used to pass additional data to OwnID widget. E.q. `pwrt` token for recover password page. | 
+| `onLogin: function` | false | - | Callback for widget with type `login`. It will be called after user is logged in into the system. |
+| `onRegister: function` | false | - | Callback for widget with type `register`. It will be called after user is registered into the system. |
+| `onRecover: function` | false | - | Callback for widget with type `recover`. It will be called in the device recovery flow. |
+| `onLink: function` | false | - | Callback for widget with type `link`. It will be called in an account linking scenario. |
+| `onError: function` | false | - | Callback for when an error occurs. |
 
 ## Quick start to using the SDK
 ### 1. Add a DOM container to the HTML

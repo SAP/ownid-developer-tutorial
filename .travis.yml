@@ -14,7 +14,7 @@ branches:
   only:
   - master
   - develop
-  - alpha-rti
+  - /^release\/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])).*$/
 
 language: node_js
 node_js:
@@ -33,9 +33,9 @@ jobs:
     env: 
       ENV=dev 
       DISTRIBUTIONID=E10S1IHXLQRRAJ
-  - if: branch=alpha-rti
+  - if: branch =~ ^release\/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])).*$
     env: 
-      ENV=staging 
+      ENV=prod 
 
 install:
   - yarn
@@ -47,8 +47,6 @@ before_deploy:
   - pyenv global 3.7.1
   - pip install -U pip
   - pip install awscli
-  - aws --version
-  - $(aws ecr get-login --region us-east-2 --no-include-email)
 
 deploy:
   - provider: script
@@ -58,7 +56,8 @@ deploy:
       all_branches: true
       condition: "$TRAVIS_BRANCH =~ ^(develop|master)$"
   - provider: script
-    script: sh scripts/publish-prod.sh
+    script: sh scripts/deploy-prod.sh
     skip_cleanup: true
     on:
-      branch: alpha-rti
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^release\/.*$

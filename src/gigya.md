@@ -2,7 +2,7 @@
 
 ## SAP Customer Data Cloud (Gigya)
 
-OwnID has out-of-the-box integration with Gigya. Whether you are using Gigya screen-sets or not you can easily integrate OwnID by following the examples below.
+OwnID has out-of-the-box integration with Gigya. This section will guide you to integrate OwnID when using Gigya screen-sets Gigya APIs. The configuration part below is relevant for both integration options.
 
 ## Configuration
 

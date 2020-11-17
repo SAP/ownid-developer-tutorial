@@ -19,7 +19,7 @@ Application parameters presented in the WebApp:
 URLs in the environment include:
 * company.com - your website
 * passwordless.company.com - JavaScript file in S3 that being directed by CNAME
-* sign.ownid.com - OwnID webapp
+* app.ownid.com - OwnID webapp
 * company.ownid.com - hosted server
 
 You have to create this CNAME (i.e. passwordless.company.com) and direct to a URL provided by OwnID. The steps are:

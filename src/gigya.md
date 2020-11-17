@@ -4,7 +4,7 @@
 
 OwnID has out-of-the-box integration with Gigya. Whether you are using Gigya screen-sets or not you can easily integrate OwnID by following the examples below.
 
-## SAP Customer Data Cloud (Gigya) Configuration
+## Configuration
 
 In order to integrate OwnID in your SAP Customer Data Cloud website, make sure you cover the following prerequisites:
 
@@ -53,7 +53,7 @@ Inside the postman collection, you will find some variables you need to replace.
 | {{userKey}}     | Gigya User or Application Key      |  
 | {{secret}}      | Gigya User or Application Secret      |  
 
-## SAP Customer Data Cloud (Gigya) Screen-sets
+## Screen-sets
 
 ### Set Default ScreenSets
 
@@ -105,7 +105,7 @@ For this integration, you must use the UI Builder JavaScript events functionalit
     }
 ```
 
-## SAP Customer Data Cloud (Gigya) APIs
+## APIs
 
 ### Quick start to using the SDK
 #### 1. Add a DOM container to the HTML

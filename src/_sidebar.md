@@ -2,7 +2,7 @@
 - [Introduction](introduction)
 - [Server](server-sdk)
 - [Web UI SDK](frontend-sdk)
-- [Integrations](gigya)
+- [UI Integrations](gigya)
 - [Deployment](deployment)
 - [Troubleshooting](troubleshooting)
 - **Links**

@@ -25,35 +25,38 @@ When your server is running in a docker container, you have to set the configura
 
 The table explain the parameters you have to include in the configuration (whether it is appsettings.json or the Yaml file).
 
-| Parameter Name | Type | Value Example | Comments |
+| Parameter Name | Type | Required (+) / Default value | Comments |
 |:-:|:-:|:-:|:-:|
-| callback_url | string | "https://<client-name>.ownid.com" |  |
-| pub_key | string | "./keys/jwtRS256.key.pub" | path to the public key. In containers can be reference to an entry in the secure storage |
-| private_key | string | "./keys/jwtRS256.key" |  |
-| did | string | "did:ownid:151850889514" | unique string to identify your website |
-| name | string | "SAP" | the name that the user will see in OwnID WebApp |
-| description | string | "SAP SE" | the description that the user will see in OwnID WebApp |
-| icon | string | "" | icon base64 |
-| cache_expiration | number | 600000 | how long the cache can hold transaction data |
-| cache_type | string | "redis" | redis or in memory web-cache |
-| cache_config | string | "http://yourredis" | redis uri. If not redis leave empty |
-| fido_enabled | boolean | true/false | FIDO2 enabled |
-| fido2_passwordless_page_url | string | https://passwordless.customer.com | passwordless URL |
-| fido2_relying_party_id | string | customer.com | customer website domain |
-| fido2_relying_party_name | string | customer | customer name |
-| fido2_user_display_name | string | passwordless | register as this user name |
-| fido2_user_name | string | passwordless | register as this user name |
-| fido2_origin | string | https://customer.com | website address |  
+| callback_url | string | + | Public server (with OwnID Server SDK) url |
+| pub_key | string | + | RSA public key for signing JWT token.<br>Value can be a raw content of RSA key file or a path to such file |
+| private_key | string | + | RSA private key for signing JWT token.<br>Value can be a raw content of RSA key file or a path to such file |
+| did | string | + | Unique string to identify your website |
+| name | string | + | The name that a user will see in OwnID WebApp |
+| description | string |  | The description that a user will see in OwnID WebApp |
+| icon | string | + | The icon that a user will see in OwnID WebApp. |
+| top_domain | string | + | callback_url and fido2_passwordless_page_url parent domain. |
+| add_cors_origins | string |  | Additional origins that will be allowed to request OwnID Server SDK |
+| maximum_number_of_connected_devices | number | 1 | Maximum number of connected devices that user can add |
+| cache_type | string | + | Redis or in memory web-cache |
+| cache_config | string |  | Cache connection string (empty for in memory) |
+| cache_expiration | number | 10 minutes | How long the cache can hold transaction data |
+| authentication_mode | string | OwnIdOnly | Enables or restricts authenticators usage.<br>Possible values: OwnIdOnly, Fido2Only, All |
+| fido2_passwordless_page_url | string | +(FIDO2 enabled) | Passwordless URL. Is Required if FIDO2 is enabled. |
+| fido2_relying_party_id | string | default = <br>passwordless page url host | Customer website domain |
+| fido2_relying_party_name | string | default = <br>name | Customer name |
+| fido2_user_display_name | string | Skip the password | Register / Login as this user name |
+| fido2_user_name | string | default = <br>user display name | Register / Login as this user identifiactor |
+| fido2_origin | string | default = <br>passwordless page url | Website address |
 
 Gigya parameters:
 
-| Parameter Name | Type | Value Example | Comments |
-|:-:|:-:|:-:|:-:|  
-| data_center | string | us1.gigya.com | Gigya data center |  
-| secret | string |  | Gigya secret |  
-| api_key | string |  | Gigya API key |  
-| user_key | string |  | Gigya user key |  
-| login_type | string | IdToken | session or IdToken (which is JWT) |  
+| Parameter Name | Type | Required (+) / Default value | Comments |
+|:-:|:-:|:-:|:-:|
+| data_center | string | + | Gigya data center |
+| secret | string | + | Gigya secret |
+| api_key | string | + | Gigya API key |
+| user_key | string |  | Gigya user key |
+| login_type | string | session | What should be the result of success login.<br>Possible values: session or IdToken (which is JWT) |
   
   
 Example for appsettings.json section:
@@ -67,23 +70,18 @@ Example for appsettings.json section:
     "data_center": "",
   },
   "ownid": {
-    "web_app_url": "https://sign.ownid.com",
-    "callback_url": "http://localhost:5002",
-    "pub_key": "./keys/jwtRS256.key.pub",
-    "private_key": "./keys/jwtRS256.key",
-    "did": "did:ownid:151850889514",
-    "name": "mozambiquehe.re",
+    "top_domain": "my-company.com",
+    "callback_url": "https://server.my-company.com",
+    "did": "did:my-company:151850889514",
+    "name": "My Company",
     "description": "Description here",
-    "cache_expiration": 600000,
-    "cache_type": "web-cache",
+    "cache_type": "redis",
     "cache_config": "localhost:6379",
-    "authentication_mode": "OwnIdOnly",
-    "fido2_passwordless_page_url": "",
-    "fido2_relying_party_id": "",
-    "fido2_relying_party_name": "",
-    "fido2_user_display_name": "",
-    "fido2_user_name": "",
-    "fido2_origin": ""
+    "overwrite_fields": false,
+    "authentication_mode": "All",
+    "fido2_passwordless_page_url": "https://passwordless.my-company.com",
+    "pub_key": "./keys/key.public",
+    "private_key": "./keys/key.private"
   },
 ```
 
@@ -212,26 +210,6 @@ Configuration parameters can either be set in appsettings.json (manually or usin
 ```cs
 public void WithBaseSettings([NotNull] Action<IOwnIdCoreConfiguration> modifyAction)
 ```
-
-A list of these settings can be found in `IOwnIdCoreConfiguration` interface. We will describe them one by one below.
-
-* `Uri` **`OwnIdApplicationUrl`** - OwnId application URI that will be used for authorization. Required. Should use HTTPS in production environments. Should be accessible by OwinId application endpoint. HTTP can only be used for development cases with `IsDevEnvironment` set to `true`
-
-* `Uri` **`CallbackUrl`** -  Uri of OwnIdSdk host. Will be used for the entire OwnID challenge process. Required. Should use HTTPS on production environments. Should be accessible by OwinId application endpoint `OwnIdApplicationUrl`. HTTP can only be used for development cases with `IsDevEnvironment` set to `true`
-
-* `RSA` **`JwtSignCredentials`** - RSA keys for signing JWT token that will be provided for OwnId application requests. Required. You could use helper methods in configuration builder to set keys from file `public void SetKeys([NotNull] string publicKeyPath, [NotNull] string privateKeyPath)` or pass the object by itself `public void SetKeys([NotNull] RSA rsa)`.
-
-* `IProfileConfiguration` **`ProfileConfiguration`** - Profile form fields configuration. Should be set with `IUserHandler<T>` with 'UseUserHandlerWithCustomProfile<TProfile, THandler>()' method in configuration builder.
-
-* `string` **`DID`** - Organization/ product unique identity. Helps to identify your application on par with the public key from `JwtSignCredentials` 
-
-* `string` **`Name`** - Name of organization / product that will be shown to end user on OwinId application page on registration / login / managing profile.  Required.
-
-* `string` **`Icon`** - Icon of organization / product that will be shown to end user on OwinId application page on registration / login / managing profile. Can be stored as URI or base64 encoded format string (`data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==`)
-
-* `string` **`Description`** - Description text that will be shown near the `Name` on OwnId application page for end-user
-
-* `bool` **`IsDevEnvironment`** - Marks if OwnIdSdk is used for development cases
 
 #### Localization settings
 All OwnIdSdk parts that require localization use `ILocalizationService` abstraction. 

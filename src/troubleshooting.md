@@ -15,9 +15,9 @@ If you get a "200 OK" response that includes the url, context, nonce and expirat
 ### Identity not found on the mobile device
 1. In case you worked with the desktop and scanned the QR code with an app that open the URL in the scanner app (i.e. WebView) the credentials are not maintained
 
-2. The identity is browser related so in case you created your identity with Samsung Internet and later access the website with Chrome, the identity will not be available
+2. The identity is browser related. Therefore, if created your identity with Samsung Internet and later access the website with Chrome, the identity will not be available
 
 3. Have you cleared your browser data?
 
-In any scenario of lost credentials, please follow the 'can't login' flow to re-create your credentials.
+In any lost credentials scenario, please follow the 'can't login' flow to re-create your credentials.
 

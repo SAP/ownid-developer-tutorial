@@ -1,29 +1,29 @@
 ## Server overview
 
-The server communicates with the Identity Management System in order to authenticate the user with the cryptographic keys created by either FIDO2 or Web Crypto API and are stored on the mobile device. 
+The server communicates with the Identity Management System in order to authenticate the user with the cryptographic keys stored on the mobile device and created by either FIDO2 or Web Crypto API. 
 
-The server can be implemented in one of the following three options:
-- OwnID host it for you
-- OwnID provide you with a docker container and you host it
-- OwnID provide you with SDK so you can integrate code into your website back-end
+The server can be implemented in one of the following options:
+- OwnID hosts the server for you
+- OwnID provides you with a docker container and you host it
+- OwnID provides you with SDK so you can integrate the code into your website's back-end
 
-The following sections will explain how to implement each of the three.
+The following sections will explain how to implement each of the aforementioned options.
 
 
 ## Development technology
 The server SDK is developed using .NET Core 3.1. 
-You have to take that in mind when considering to implement the SDK code.
+You have to keep that in mind when considering SDK code implementation.
 
 
 ## Server configuration
 
-Setting the configuration is relevant only if you implement the SDK or host the docker container yourself. When OwnID host the server, you have nothing to do.
+Setting the configuration is relevant only if you implement the SDK or host the docker container yourself. When OwnID hosts the server, you do not have to take any furhter steps.
 
-When implementing the server SDK, the configuration is taken from appsettings.json or you can also set any parameter as an environment variable. Setting the parameters in appsettings.json can be either manually or using the configuration tool that will guide you per parameter.
+When implementing the server SDK, the configuration is taken from appsettings.json or you can also set any parameter as an environment variable. Setting the parameters in appsettings.json can be either done manually or using a configuration tool that will guide you per parameter.
 
-When your server is running in a docker container, you have to set the configuration in Yaml file.
+When your server is running in a docker container, you have to set the configuration in a Yaml file.
 
-The table explain the parameters you have to include in the configuration (whether it is appsettings.json or the Yaml file).
+The table below explains the parameters you have to include in the configuration (whether it is appsettings.json or the Yaml file).
 
 | Parameter Name | Type | Required (+) / Default value | Comments |
 |:-:|:-:|:-:|:-:|
@@ -85,7 +85,7 @@ Example for appsettings.json section:
   },
 ```
 
-Example for Yaml configuration file can be found in the docker container.
+An Example for Yaml configuration file can be found in the docker container.
 
 
 ## Server SDK
@@ -119,9 +119,9 @@ public class UserHandler : IUserHandler<UserProfile>
 
 3. Add OwnIdSdk services
 
-Go to `StartUp.cs`. Find `ConfigureServices` method and use `AddOwnId(...)` extension at the start to add mandatory services and attach already `UserProfile` and `UserHandler`.
+Go to `StartUp.cs`. Find `ConfigureServices` method and use `AddOwnId(...)` extension at the start to add mandatory services and attach  `UserProfile` and `UserHandler`.
 
-SetKeys method can be removed and also the following one, methodWithBaseSettings, if you set the fields in appsettings.json (manually or using the configuration tool). The configuration tool can either be used to create the key pair only or to get user input for all necessary parameters and set them in appsettings.json.
+SetKeys method can be removed as well as methodWithBaseSettings, if you set up the fields in appsettings.json (manually or using the configuration tool). The configuration tool can either be used to create the key pair only or to get user input for all necessary parameters and set them in appsettings.json.
 
 ```cs
 public void ConfigureServices(IServiceCollection services)
@@ -159,8 +159,8 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 5. Can't login
 
-This refer to 'forgot password' flow. When user open page 'reset password', they see OwnID widget to also offer password-less login at this point.
-In case you are using Gigya then this server functionality is already implemented.
+This refers to 'forgot password' flow. When a user opens the  'reset password' page, they see the OwnID widget to provide an alternative passwordless login at this point.
+If you are using Gigya (SAP CDC) then this server functionality is already implemented.
 
 Required actions
 
@@ -180,7 +180,7 @@ It contains 2 methods:
 
 #### Enable Recovery feature
 
-To enable Recovery feature, you need to call `builder.UseAccountRecovery` and pass class which implement interface as a type parameters at `Startup.ConfigureServices` method:
+To enable Recovery feature, you need to call `builder.UseAccountRecovery` and pass class which implements interface as a type parameters at `Startup.ConfigureServices` method:
 
 ```cs
 public class Startup
@@ -198,23 +198,23 @@ public class Startup
 }
 ```
 
-Notice `CustomAccountRecoveryHandler` in the code example is custom implementation of `IAccountRecoveryHandler`
+Notice `CustomAccountRecoveryHandler` in the code example is a custom implementation of `IAccountRecoveryHandler`
 
 
 ### Advanced settings
 All configuration settings should be provided in AddOwnId(...) extension method on ConfigureServices application stage. Possible ways of the configuration tuning will be listed below.
 
 #### Configuration parameters
-Configuration parameters can either be set in appsettings.json (manually or using the configuration tool). The configuration tool get user input for all necessary parameters and set them in appsettings.json. Alternatively, use method `WithBaseSettings`.
+Configuration parameters can either be set in appsettings.json (manually or using the configuration tool). The configuration tool collects user input for all the necessary parameters and sets them in appsettings.json. Alternatively, use method `WithBaseSettings`.
 
 ```cs
 public void WithBaseSettings([NotNull] Action<IOwnIdCoreConfiguration> modifyAction)
 ```
 
 #### Localization settings
-All OwnIdSdk parts that require localization use `ILocalizationService` abstraction. 
-As for `OwnIdSdk.NetCore3.Web` we created its implementation called `LocalizationService`. It receives the text that should be localized and tries to find it as a key in the resource you define or in default OwnId localization. 
-To provide localization resource you can use:
+All OwnIdSdk parts which require localization use `ILocalizationService` abstraction. 
+As for `OwnIdSdk.NetCore3.Web` we created an implementation called `LocalizationService`. The implementation receives the text that should be localized and tries to find it as a key in the resource you defined or in default OwnId localization. 
+To provide the localization resource you can use:
 * `SetLocalizationResource` that sets custom localization resource (*.resx, etc.) by its type and name to be used in LocalizationService
 ```cs
 public void SetLocalizationResource([NotNull] Type resourceType, [NotNull] string resourceName)
@@ -225,17 +225,17 @@ public void SetStringLocalizer<TLocalizer>() where TLocalizer : IStringLocalizer
 ```
 
 #### Cache store settings
-OwnId SDK need a fast-reading store to place authorization temporary data. By default, it uses in-memory primitive store, but you can easily override this logic by implementing `ICacheStore` interface and registering its implementation in configuration builder with method `UseCacheStore`.
+The OwnId SDK needs a fast-reading store to place temporary authorization data. By default, it uses in-memory primitive store, but you can easily override this logic by implementing an `ICacheStore` interface and registering its implementation in the configuration builder with the `UseCacheStore` method.
 ```cs
 public void UseCacheStore<TStore>(ServiceLifetime serviceLifetime) where TStore : class, ICacheStore
 ```
-Where `TStore` is your custom store interaction implementation. It has primitive operations like set, find and remove. 
-The `ServiceLifetime` is enum the will describe it's lifecycle in injection mechanism.
+Where `TStore` is your custom store interaction implementation. It has primitive operations such as: set, find and remove. 
+The `ServiceLifetime` is enum and will describe its lifecycle in an injection mechanism.
 
 ### Setting custom errors
-OwnID server SDK catch all unhandled exception. No unhandled exception is being transferred.
+The OwnID server SDK catches all unhandled exception. No unhandled exception is being transferred.
 
-In case then you need to validate some user inputs (for example, during registration process), you can use `IUserProfileFormContext`, which is being passed to all extension points which support custom error processing.
+Should that happen, then you need to validate some user inputs (for example, during registration process), you can use `IUserProfileFormContext`, which is being passed to all extension points that support custom error processing.
 
 #### `SetGeneralError`
 
@@ -293,5 +293,5 @@ public class CustomUserProfile<TProfile> : IUserHandler<TProfile> where TProfile
 ```
 
 ## Server container
-When using the container in your environment, you only need to set the configuration part. When OwnID host your container, OwnID will also set your configuration.
+When using the container in your environment, you only need to set the configuration part. When OwnID hosts your container, OwnID will also set up your configuration.
 

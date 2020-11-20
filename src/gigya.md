@@ -2,7 +2,7 @@
 
 ## SAP Customer Data Cloud (Gigya)
 
-OwnID has out-of-the-box integration with Gigya. This section will guide you to integrate OwnID when using Gigya screen-sets Gigya APIs. The configuration part below is relevant for both integration options.
+OwnID has an out-of-the-box integration with Gigya (SAP CDC). This section will guide you on to integrate OwnID when using Gigya screen-sets and Gigya APIs. The configuration part below is relevant for both integration options.
 
 ## Configuration
 
@@ -21,7 +21,7 @@ In order to integrate OwnID in your SAP Customer Data Cloud website, make sure y
 
 ### Generating Gigya Auth Keys
 
-Most REST API requests to Customer Data Cloud should be made securely, using an authentication mechanism. Using an application key and secret is one of the recommended methods by SAP Customer Data Cloud and requires creating an application on the Console, that is associated with a permission group.
+Most REST API requests to Customer Data Cloud should be made securely, using an authentication mechanism. Using an application key and a secret is one of the recommended methods by SAP Customer Data Cloud and requires creating an application on the Console, that is associated with a permission group.
 
 To generate an application key and secret to allow OwnID to perform REST API requests to SAP Customer Data Cloud, please check the instructions [here](https://developers.gigya.com/display/GD/Signing+Requests+to+SAP+Customer+Data+Cloud#SigningRequeststoSAPCustomerDataCloud-ApplicationandUserKeys).
 
@@ -274,10 +274,10 @@ Structure of `ownidPayload` for Registration
 
 #### Login
 
-Next code will show how integrate OwnID login widget into your site.
+Next code will show how to integrate the OwnID login widget into your site.
 
-After user finish OwnID flow, login will proceed on backend side.
-Backend will return login cookies, and you will need to set them and navigate to the next page.
+After user completes the OwnID flow, login will proceed on the backend side.
+Backend will return login cookies, then you will need to set them and navigate to the next page.
 
 In case if user already has an account, but he wants to use OwnID. He can use skip the password on the login form. 
 Widget will ask for login and password.
@@ -376,7 +376,7 @@ Structure of `onLogin` callback payload:
 
 #### Recover
 
-Next code will show how integrate OwnID recover widget into your site.
+Next code will show how to integrate OwnID recover widget into your site.
 
 Recover widget will require `pwrt` GET parameter from Gigya's recover password page.
 You must pass it to data field.
@@ -418,7 +418,7 @@ You must pass it to data field.
 
 You can link your existing account with OwnID. It will enable passwordless login for you.
 
-Next code will show how integrate OwnID link widget into your site.
+Next code will show how to integrate OwnID link widget into your site.
 
 `onlink` callback will be called after accounts will be linked.
 

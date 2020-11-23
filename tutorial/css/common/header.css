@@ -1,0 +1,11 @@
+.header {
+    background-color: #354a5f;
+    color: #fff;
+}
+
+.header a:active,
+.header a:hover,
+.header a:link,
+.header a:visited {
+    color: #fff;
+}

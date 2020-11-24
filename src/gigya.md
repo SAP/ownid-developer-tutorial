@@ -1,10 +1,8 @@
-# UI Integrations
-
 ## SAP Customer Data Cloud (Gigya)
 
-OwnID has an out-of-the-box integration with Gigya (SAP CDC). This section will guide you on to integrate OwnID when using Gigya screen-sets and Gigya APIs. The configuration part below is relevant for both integration options.
+OwnID offers a plug-and-play integration with SAP CDC. This section will guide you on to integrate OwnID when using screen-sets or Gigya APIs. The configuration part below is relevant for both integration options.
 
-## Configuration
+### Configuration
 
 In order to integrate OwnID in your SAP Customer Data Cloud website, make sure you cover the following prerequisites:
 
@@ -19,13 +17,13 @@ In order to integrate OwnID in your SAP Customer Data Cloud website, make sure y
 
 - Gigya console access (https://console.gigya.com/)
 
-### Generating Gigya Auth Keys
+#### Generating Gigya Auth Keys
 
 Most REST API requests to Customer Data Cloud should be made securely, using an authentication mechanism. Using an application key and a secret is one of the recommended methods by SAP Customer Data Cloud and requires creating an application on the Console, that is associated with a permission group.
 
 To generate an application key and secret to allow OwnID to perform REST API requests to SAP Customer Data Cloud, please check the instructions [here](https://developers.gigya.com/display/GD/Signing+Requests+to+SAP+Customer+Data+Cloud#SigningRequeststoSAPCustomerDataCloud-ApplicationandUserKeys).
 
-### Configuring Gigya Schema
+#### Configuring Gigya Schema
 
 For proper OwnId functioning, the following fields should be created in the Gigya schema object, with the namespace **data.ownIdConnections**:
 
@@ -53,13 +51,13 @@ Inside the postman collection, you will find some variables you need to replace.
 | {{userKey}}     | Gigya User or Application Key      |  
 | {{secret}}      | Gigya User or Application Secret      |  
 
-## Screen-sets
+### Screen-sets Integration
 
-### Set Default ScreenSets
+#### Set Default ScreenSets
 
 To select the default "RegistrationLogin" screen-set you wish to use in web and mobile, please follow [this](https://developers.gigya.com/display/GD/Policies#Policies-DefaultLoginandRegistrationScreen-Set) instructions.
 
-### Initialize OwnID SDK
+#### Initialize OwnID SDK
 
 Run `ownid.init` to initialize the widget in your Login, Registration, and Forget Password pages. example:
 
@@ -79,7 +77,7 @@ Run `ownid.init` to initialize the widget in your Login, Registration, and Forge
 </body>
 ```
 
-### Enabling JavaScript events
+#### Enabling JavaScript events
 
 **NOTE**
 For this integration, you must use the UI Builder JavaScript events functionality in the Console.
@@ -105,9 +103,9 @@ For this integration, you must use the UI Builder JavaScript events functionalit
     }
 ```
 
-## APIs
+### APIs Integration
 
-### Quick start to using the SDK
+#### Quick start
 #### 1. Add a DOM container to the HTML
 
 Open HTML page you want to edit. Add an empty `<div>` tag to mark the spot where you want to display OwnID widget.
@@ -159,7 +157,7 @@ Run `ownid.init` to init the widget and `ownid.render` to add OwnID widget to th
 ```
 This code will add OwnID widget to the `#ownid` container
 
-### Configuring and Examples
+### Sample code
 
 #### Registration
 

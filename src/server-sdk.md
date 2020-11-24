@@ -1,22 +1,25 @@
-## Server overview
+## Overview
 
-The server communicates with the Identity Management System in order to authenticate the user with the cryptographic keys stored on the mobile device and created by either FIDO2 or Web Crypto API. 
+The OwnID server component communicates with the Identity Management System in order to authenticate the user with the cryptographic keys stored on the mobile device and created by either FIDO2 or Web Crypto API.
 
-The server can be implemented in one of the following options:
-- OwnID hosts the server for you
+### Development technology <!-- {docsify-ignore} -->
+
+The server SDK is developed using .NET 5.0.\
+You have to keep that in mind when considering SDK code implementation.
+
+### Deployment scenarios <!-- {docsify-ignore} -->
+
+The OwnID server component can be deployed on-premise or in the cloud. We offer the following possibilities:
+
+- OwnID hosts the server for you (recommended option)
 - OwnID provides you with a docker container and you host it
-- OwnID provides you with SDK so you can integrate the code into your website's back-end
+- OwnID provides you with the SDK code so you can integrate it into your website's back-end
 
 The following sections will explain how to implement each of the aforementioned options.
 
-
-## Development technology
-The server SDK is developed using .NET 5.0 
-You have to keep that in mind when considering SDK code implementation.
-
 ## Server configuration
 
-Setting the configuration is relevant only if you implement the SDK or host the docker container yourself. When OwnID hosts the server, you do not have to take any furhter steps.
+Setting the configuration is relevant only if you implement the SDK or host the docker container yourself. When OwnID hosts the server, you do not have to take any further steps.
 
 When implementing the server SDK, the configuration is taken from appsettings.json or you can also set any parameter as an environment variable. Setting the parameters in appsettings.json can be either done manually or using a configuration tool that will guide you per parameter.
 
@@ -116,7 +119,7 @@ public class UserHandler : IUserHandler<UserProfile>
 }
 ```
 
-3. Add OwnIdSdk services
+3. Add OwnIDSdk services
 
 Go to `StartUp.cs`. Find `ConfigureServices` method and use `AddOwnId(...)` extension at the start to add mandatory services and attach  `UserProfile` and `UserHandler`.
 
@@ -145,7 +148,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-4. Add OwnIdSdk middleware
+4. Add OwnIDSdk middleware
 
 Find `Configure` method in `StartUp.cs` and use `UseOwnId()` extension at the start to add register/login requests processors.
 

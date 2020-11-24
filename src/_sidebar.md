@@ -1,9 +1,9 @@
 - **Documentation**
 - [Introduction](introduction)
-- [Server](server-sdk)
-- [Web UI SDK](frontend-sdk)
-- [UI Integrations](gigya)
-- [Deployment](deployment)
+- [OwnID Server](server-sdk)
+- [OwnID Web SDK](frontend-sdk)
+- [OwnID Integrations](gigya)
+- [Security](security)
 - [Troubleshooting](troubleshooting)
 - **Links**
 - [ownid.com](https://ownid.com)

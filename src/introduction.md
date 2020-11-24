@@ -6,7 +6,7 @@ OwnID by SAP offers a password-less login to your website. It is using cryptogra
 
 When a user access your website from the mobile, all the interaction with the user is in the mobile. However, when the user access your website from the desktop, they will be presented with QR code to be scanned by their mobile device.
 
-OwnID by SAP include the following components:
+OwnID by SAP includes the following components:
 * Widget you integrate in your website
 * WebApp that run on the user mobile device
 * Server that communicate with your Identity System. The server can be created by the customer using OwnID SDK or OwnID can host a server for you

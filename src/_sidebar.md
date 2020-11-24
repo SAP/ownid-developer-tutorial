@@ -1,9 +1,10 @@
 - **Documentation**
 - [Introduction](introduction)
-- [Server](server-sdk)
-- [Web UI SDK](frontend-sdk)
-- [UI Integrations](gigya)
-- [Step by step tutorial](tutoial)
+- [OwnID Server](server-sdk)
+- [OwnID Web SDK](frontend-sdk)
+- [OwnID Integrations](gigya)
+- [Security](security)
+- [Step by step tutorial](tutorial)
 - [Deployment](deployment)
 - [Troubleshooting](troubleshooting)
 - **Links**

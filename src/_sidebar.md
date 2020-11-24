@@ -3,6 +3,7 @@
 - [Server](server-sdk)
 - [Web UI SDK](frontend-sdk)
 - [UI Integrations](gigya)
+- [Step by step tutorial](tutoial)
 - [Deployment](deployment)
 - [Troubleshooting](troubleshooting)
 - **Links**

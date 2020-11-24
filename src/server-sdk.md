@@ -11,7 +11,7 @@ The following sections will explain how to implement each of the three.
 
 
 ## Development technology
-The server SDK is developed using .NET Core 3.1. 
+The server SDK is developed using .NET 5.0 
 You have to take that in mind when considering to implement the SDK code.
 
 
@@ -139,7 +139,7 @@ public void ConfigureServices(IServiceCollection services)
             {
                 x.DID = "<your application unique identifier>"; // helps to identify your application
                 x.Name = "<your product name>"; // will be shown to users
-                x.CallbackUrl = new Uri("https://my-app.com"); // public Uri to this net core app
+                x.CallbackUrl = new Uri("https://my-app.com"); // public Uri to this app
                                                                // for sending login/register requests
             });
         });
@@ -171,7 +171,7 @@ To enable recovery functionality, you need to
 
 #### Implement `IAccountRecoveryHandler` interface
 
-To inject your custom logic to recovery process, you need to implement `OwnIdSdk.NetCore3.Extensibility.Flow.Abstractions.IAccountRecoveryHandler` interface
+To inject your custom logic to recovery process, you need to implement `OwnID.Extensibility.Flow.Abstractions.IAccountRecoveryHandler` interface
 
 It contains 2 methods:
 
@@ -213,7 +213,7 @@ public void WithBaseSettings([NotNull] Action<IOwnIdCoreConfiguration> modifyAct
 
 #### Localization settings
 All OwnIdSdk parts that require localization use `ILocalizationService` abstraction. 
-As for `OwnIdSdk.NetCore3.Web` we created its implementation called `LocalizationService`. It receives the text that should be localized and tries to find it as a key in the resource you define or in default OwnId localization. 
+As for `OwnID.Web` we created its implementation called `LocalizationService`. It receives the text that should be localized and tries to find it as a key in the resource you define or in default OwnId localization. 
 To provide localization resource you can use:
 * `SetLocalizationResource` that sets custom localization resource (*.resx, etc.) by its type and name to be used in LocalizationService
 ```cs

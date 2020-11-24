@@ -16,13 +16,13 @@ Config Properties
 
 ### render
 
-Renders widget. Returns [Ownid widget object](#ownid-widget-object). 
+Renders widget. Returns [OwnID widget object](#ownid-widget-object). 
 
 Config Properties
 
 | Name | Required | Default Value | Description | 
 |---|---|---|---|
-| `element: DOMElement` | true | - | Wrapper for Ownid widget  |
+| `element: DOMElement` | true | - | Wrapper for OwnID widget  |
 | `type: string` | true | - | Type of the widget. `login` , `register`, `recover` or `link` |
 | `language: string` | false | `'en'` | Language for the widget localisation. Overrides general configuration for this widget |
 | `URLPrefix: string` | false | `/ownid/` | Url prefix for OwnID backend sdk. E.q. `https://example.com/api/ownid/`. Overrides general configuration for this widget |
@@ -30,7 +30,7 @@ Config Properties
 | `desktopSubtitle: string` | false | default string | Subtitle of the widget for desktop |
 | `statusInterval: number` | false | 2000 | Interval in ms between status calls. Overrides general configuration for this widget |
 | `inline`: [Inline widget config](#inline-widget) | false | - | Configuration for for inline widget |
-| `note:` `boolean/null/string/` [Ownid Note](#ownid-note) | false | default string | Describes next steps after Ownid flow succeed |
+| `note:` `boolean/null/string/` [OwnID Note](#ownid-note) | false | default string | Describes next steps after OwnID flow succeed |
 | `userHandler:` [IUserHandler](#IUserHandler) | false | - | Handler for special actions required by selected flow. [Read more](#IUserHandler) |
 | `data`: `{ pwrt: string }`| false | - | Used to pass additional data to OwnID widget. E.q. `pwrt` token for recover password page. | 
 | `onLogin: function` | false | - | Callback for widget with type `login`. It will be called after user is logged in into the system. |
@@ -51,21 +51,21 @@ Defines a configuration for Inline widget
 | `offset: [number, number]` | false | - | Moves Inline widget by `[x, y]` px. E.q. [-10, 15] will move Inline widget for 10px left and 15px down |
 | `credentialsAutoFillButtonOffset:` `number` | false | Moves Safari's key icon. This param will be used as 'margin-right' for `-webkit-credentials-auto-fill-button` |
 
-#### Ownid Note
+#### OwnID Note
 
 Sets custom text to the note. You can hide it by setting `false` or `null` to this param. 
 
 | Name | Required | Description | 
 |---|---|---|
-| `text: string` | true | Defines text to show when Ownid completes its flow |
+| `text: string` | true | Defines text to show when OwnID completes its flow |
 | `wrapperElement: HTMLElement` | false | Wrapper for note |
 
 You can just set your custom text to `note` param instead of providing an object. E.q. `note: '<your custom text for note>'`.
 
 #### IUserHandler
 
-User handler used by Ownid in different flows. 
-E.q. `Login` flow uses `isUserExists` method to verify user by provided id to be able to link account with Ownid profile.
+User handler used by OwnID in different flows. 
+E.q. `Login` flow uses `isUserExists` method to verify user by provided id to be able to link account with OwnID profile.
 
 User handler should be implemented by web master.
 It should provide set of functions from list below.
@@ -79,31 +79,26 @@ Not required if you are using Gigya.
 
 ### getOwnIDPayload
 
-Returns `Promise` with Ownid response from `onLogin` or other callback, depends on widget type.
-Expects [Ownid widget object](#ownid-widget-object) as incoming parameter.  
+Returns `Promise` with OwnID response from `onLogin` or other callback, depends on widget type.
+Expects [OwnID widget object](#ownid-widget-object) as incoming parameter.  
 
 ### reRenderWidget
 
-Recreates Ownid widget.
+Recreates OwnID widget.
 
-Returns new [Ownid widget object](#ownid-widget-object).
+Returns new [OwnID widget object](#ownid-widget-object).
 
-Expects [Ownid widget object](#ownid-widget-object).  
+Expects [OwnID widget object](#ownid-widget-object).  
 
-### generateOwnIDPassword
-
-Generates a password with provided length.
-Returns string.  
-
-## Ownid widget object
+## OwnID widget object
 
 ### destroy
 
-Destroys the current Ownid widget.
+Destroys the current OwnID widget.
 
 ### update
 
-Updates Ownid widget with the new configurations.
+Updates OwnID widget with the new configurations.
 
 Config Properties
 

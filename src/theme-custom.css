@@ -1,6 +1,17 @@
 :root {
-    --sidebar-width: 25rem;
+    --sidebar-width: 20rem;
     --base-font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+    --base-font-size: 14px;
+
+  /* Add sidebar navigation bullets */
+  --sidebar-nav-link-before-content-l1: '•'; 
+  --sidebar-nav-link-before-content-l2: '-';
+  --cover-heading-color: yellow;
+  --link-text-decoration-color: #ffdf72;
+  --link-color: #475E75;
+  --code-inline-background: #ffdbbb;
+  --sidebar-nav-link-font-weight--active: bold;
+  
 }
 
 @media (min-width: 48em)
@@ -8,4 +19,8 @@
   .sidebar-toggle .sidebar-toggle-button {
       top: 8px;
   }
+}
+
+.markdown-section a {
+  font-weight: bold;
 }

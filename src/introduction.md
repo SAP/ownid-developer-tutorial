@@ -25,3 +25,7 @@ OwnID by SAP includes the following core components:
 
 * [OwnID Web SDK](/frontend-sdk.md) - Provides a widget that you can integrate in your websites.
 * [OwnID Server](/server-sdk.md) - A Backend component responsible to communicate with your Identity Management System.
+  
+## Integrations
+
+* [SAP Customer Data Cloud](/gigya.md)

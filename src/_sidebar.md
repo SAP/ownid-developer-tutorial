@@ -1,5 +1,5 @@
 - **Documentation**
-- [Introduction](introduction)
+- [Introduction](/)
 - [OwnID Server](server-sdk)
 - [OwnID Web SDK](frontend-sdk)
 - [OwnID Integrations](gigya)

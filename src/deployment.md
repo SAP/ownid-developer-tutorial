@@ -1,10 +1,10 @@
 
 ## Productive environment
-The following steps refer to environment where OwnID host the server and Gigya is the Identity Management System.
+The following steps refer to an environment where OwnID hosts the server and Gigya (SAP CDC) is the Identity Management System.
 
 1. Hosted server
 
-OwnID person will ask you for some parameters. 
+The OwnID Implementation consultant will ask you for the following parameters
 
 Access to Gigya:
 - Gigya API key, App/User key, and secret

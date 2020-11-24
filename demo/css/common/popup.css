@@ -1,0 +1,108 @@
+.popup-container {
+    max-width: 480px;
+    width: calc(100% - 16px);
+    margin: 48px auto 0;
+}
+
+.popup-content {
+    margin-top: 40px;
+    padding: 24px 24px 32px;
+
+    background: #FFFFFF;
+    box-shadow: 0 8px 16px rgba(4, 172, 167, 0.16), 0 0 2px rgba(4, 172, 167, 0.16);
+    border-radius: 6px;
+}
+
+.popup-terms {
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+
+    color: #5B738B;
+}
+
+.popup-text {
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.forgot-link {
+    color: #354A5F;
+    text-decoration: underline;
+
+    line-height: 20px;
+
+    margin: 12px 0 20px;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.forgot-password-title {
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: bold;
+}
+
+.forgot-password-description {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 32px;
+}
+
+.forgot-password-description.send {
+    margin-top: 3px;
+    margin-bottom: 16px;
+    line-height: 24px;
+}
+
+
+.forgot-password-send-icon {
+    width: 136px;
+    margin: 0 auto;
+}
+
+.email-not-sent,
+.email-sent {
+    display: flex;
+    flex-direction: column;
+}
+
+.email-sent {
+    display: none;
+}
+
+.profile {
+    text-align: center;
+    align-items: center;
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: bold;
+    color: #354A5F;
+    cursor: pointer;
+    padding-bottom: 20px;
+}
+
+.tooltip-link {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: normal;
+    color: #354A5F;
+    display: flex;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.tooltip-link:hover {
+    background: #F5F6F7;
+    border-radius: 4px;
+}
+
+.logout-icon {
+    background: url('/assets/icons/check-out.svg');
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}

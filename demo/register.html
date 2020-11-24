@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OwnID Demo</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+  <script src="https://cdns.gigya.com/js/gigya.js?apikey=3_wIG6IeYgWWBLHAFKPEjfJCyNBF4srsPrvtycNTFJI0s5fHM0_ZlRDPDoTYamScOt"></script>
+  <script charset="utf-8" src="/js/main.js"></script>
+  <script>
+      function onRegisterWithOwnID() {
+          var data;
+          var firstName = document.querySelector('#first-name').value;
+          var email = document.querySelector('#email').value;
+          var password = document.querySelector('#password').value;
+          var errors = document.querySelector('.errors');
+          errors.classList.remove('show');
+
+          ownid.getOwnIDPayload(window.ownidWidget).then(function (ownidPayload) {
+              if (ownidPayload.error) {
+                  errors.classList.add('show');
+                  errors.textContent = ownidPayload.message;
+                  return;
+              }
+
+              if (ownidPayload.data) {
+                  password = window.ownid.generateOwnIDPassword(12);
+                  data = {
+                      ownIdConnections: [
+                          ownidPayload.data,
+                      ],
+                  };
+              }
+
+              window.gigya.accounts.initRegistration({
+                  callback: function (response) {
+                      window.gigya.accounts.register({
+                          regToken: response.regToken,
+                          email: email,
+                          password: password,
+                          profile: {
+                              firstName,
+                          },
+                          data: data,
+                          finalizeRegistration: true,
+                          callback: function (res) {
+                              if (res.status === 'FAIL') {
+                                  errors.classList.add('show');
+                                  errors.textContent = res.errorDetails;
+
+                                  return;
+                              }
+
+                              window.location = '/account.html';
+                          }
+                      });
+                  },
+              });    });
+      }
+
+      window.ownidAsyncInit = function() {
+          ownid.init({
+              URLPrefix: 'https://passwordless.pilot.ownid.com/ownid/'
+          });
+
+          window.ownidWidget = ownid.render({
+              type: 'register',
+              element: document.querySelector('#ownid'),
+              inline: {
+                  targetElement: document.querySelector('#password'),
+                  additionalElements: [document.querySelector('#confirm-password')],
+                  offset: [-10, 0]
+              }
+          });
+      }
+  </script>
+</head>
+<body>
+
+<header class="header">
+  <div class="row">
+    <div class="column side">
+      <img src="/assets/ownid-logo.svg" alt="logo" width="140" height="50">
+    </div>
+
+    <div class="column middle">This website is only for demoing purposes to showcase how the OwnID widget functions.
+      <p><a href="mailto:contact@ownid.com"> Want to learn more? Contact us</a></p>
+    </div>
+  </div>
+</header>
+
+<div class="popup-container">
+
+  <div class="popup-content">
+    <nav class="own-nav-tabs">
+      <a class="own-nav-link" href="/login.html">Log in</a>
+      <a class="own-nav-link active" href="/register.html">Create Account</a>
+    </nav>
+
+    <form class="own-form" onsubmit="onRegisterWithOwnID(); return false;">
+      <div class="errors"></div>
+
+      <input class="own-input" type="text" placeholder="First Name" id="first-name">
+
+      <input class="own-input" type="email" placeholder="Email" id="email">
+
+      <input class="own-input" type="password" placeholder="Password" id="password">
+
+      <input class="own-input" type="password" placeholder="Confirm Password" id="confirm-password">
+
+      <div id="ownid"></div>
+
+      <button class="own-button" type="submit">Create Account</button>
+    </form>
+
+    <div class="popup-terms">
+      By creating an account you agree to our
+
+      <a class="own-link" target="_blank" href="https://www.sap.com/corporate/en/legal/terms-of-use.html">
+        Terms of use.
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="copy item-copy">© 2020 OwnID by SAP</div>
+
+  <nav>
+    <div class="footer-navigation">
+      <a class="footer-nav-item item-copy" target="_blank" href="https://www.sap.com/corporate/en/legal/terms-of-use.html">Terms of use</a>
+      <a class="footer-nav-item item-copy" target="_blank" href="https://www.sap.com/about/legal/privacy.html">Privacy</a>
+    </div>
+  </nav>
+</footer>
+
+<script async defer src="https://cdn.ownid.com/js/gigya-sdk.es5.js"></script>
+
+</body>
+</html>

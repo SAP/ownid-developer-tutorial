@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OwnID Demo</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+  <script src="https://cdns.gigya.com/js/gigya.js?apikey=3_wIG6IeYgWWBLHAFKPEjfJCyNBF4srsPrvtycNTFJI0s5fHM0_ZlRDPDoTYamScOt"></script>
+  <script charset="utf-8" src="/js/main.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="row">
+    <div class="column side">
+      <img src="/assets/ownid-logo.svg" alt="logo" width="140" height="50">
+    </div>
+
+    <div class="column middle">This website is only for demoing purposes to showcase how the OwnID widget functions.
+      <p><a href="mailto:contact@ownid.com"> Want to learn more? Contact us</a></p>
+    </div>
+  </div>
+</header>
+
+<div class="popup-container">
+
+  <div class="popup-content">
+    <nav class="own-nav-tabs">
+      <a class="own-nav-link" href="/login.html">Log in</a>
+      <a class="own-nav-link active" href="/register.html">Create Account</a>
+    </nav>
+
+    <form class="own-form" onsubmit="onRegister(); return false;">
+      <div class="errors"></div>
+
+      <input class="own-input" type="text" placeholder="First Name" id="first-name">
+
+      <input class="own-input" type="email" placeholder="Email" id="email">
+
+      <input class="own-input" type="password" placeholder="Password" id="password">
+
+      <input class="own-input" type="password" placeholder="Confirm Password" id="confirm-password">
+
+      <button class="own-button" type="submit">Create Account</button>
+    </form>
+
+    <div class="popup-terms">
+      By creating an account you agree to our
+
+      <a class="own-link" target="_blank" href="https://www.sap.com/corporate/en/legal/terms-of-use.html">
+        Terms of use.
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="copy item-copy">© 2020 OwnID by SAP</div>
+
+  <nav>
+    <div class="footer-navigation">
+      <a class="footer-nav-item item-copy" target="_blank" href="https://www.sap.com/corporate/en/legal/terms-of-use.html">Terms of use</a>
+      <a class="footer-nav-item item-copy" target="_blank" href="https://www.sap.com/about/legal/privacy.html">Privacy</a>
+    </div>
+  </nav>
+</footer>
+
+</body>
+</html>

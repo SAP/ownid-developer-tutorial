@@ -1,6 +1,6 @@
 ## Overview
 
-The OwnID server component communicates with the Identity Management System in order to authenticate the user with the cryptographic keys stored on the mobile device and created by either FIDO2 or Web Crypto API.
+The OwnID server component communicates with your Identity Management System in order to authenticate the user with the cryptographic keys stored on the mobile device and created by either FIDO2 or Web Crypto APIs.
 
 ### Development technology <!-- {docsify-ignore} -->
 

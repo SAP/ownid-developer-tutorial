@@ -6,18 +6,21 @@
   /* Add sidebar navigation bullets */
   --sidebar-nav-link-before-content-l1: '•'; 
   --sidebar-nav-link-before-content-l2: '-';
-  --cover-heading-color: yellow;
+  --cover-heading-color: #FFDF72;
   --link-text-decoration-color: #ffdf72;
   --link-color: #475E75;
   --code-inline-background: #ffdbbb;
   --sidebar-nav-link-font-weight--active: bold;
+  --mark-background: #5a5750;
+  --mark-color: yellow;
+  --base-font-family: Seventytwo, sans-serif;
   
 }
 
 @media (min-width: 48em)
 {
   .sidebar-toggle .sidebar-toggle-button {
-      top: 8px;
+      top: 4px;
   }
 }
 

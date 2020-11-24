@@ -6,6 +6,15 @@ OwnID offers a plug-and-play integration with SAP CDC. This section will guide y
 
 In order to integrate OwnID in your SAP Customer Data Cloud website, make sure you cover the following prerequisites:
 
+#### Access to OwnID Server
+
+If you want to know more about the OwnID Server component, please read [this](server-sdk.md) section.
+
+When using the OwnID cloud hosted solution, you will get access to the `URLPrefix`. This URL is used by the WEB SDK to communicate with the Server component of OwnID and it will be configured when the OwnID Web SDK is initialized.\
+You can check the connectivity with server following the steps described in [this](troubleshooting?id=checking-connectivity-with-the-server) section.
+
+#### Access and Permissions
+
 - Permissions to run the following Gigya REST API endpoints:
   - accounts.setSchema  
   - accounts.setAccountInfo

@@ -10,7 +10,7 @@ Then use `npm start` to run sample application.
 
 Or `npm start:demo` to run demo application with already integrated OwnID.
 
-## OnnID integration
+## OwnID integration
 
 ### Registration
 Open `tutorial/registration.html` file.

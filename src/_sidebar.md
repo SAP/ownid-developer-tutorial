@@ -4,8 +4,6 @@
 - [OwnID Web SDK](frontend-sdk)
 - [OwnID Integrations](gigya)
 - [Security](security)
-- [Step by step tutorial](tutorial)
-- [Deployment](deployment)
 - [Troubleshooting](troubleshooting)
 - **Links**
 - [ownid.com](https://ownid.com)

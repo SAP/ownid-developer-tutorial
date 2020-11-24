@@ -11,9 +11,9 @@ You have to keep that in mind when considering SDK code implementation.
 
 The OwnID server component can be deployed on-premise or in the cloud. We offer the following possibilities:
 
-- OwnID hosts the server for you (recommended option)
-- OwnID provides you with a docker container and you host it
-- OwnID provides you with the SDK code so you can integrate it into your website's back-end
+- OwnID hosts the server for you. (*recommended option*) [Cloud Solution]
+- OwnID provides you with a docker container and you host it. [Self-Hosted Solution]
+- OwnID provides you with the SDK code so you can integrate it into your website's back-end. [Self-Hosted Solution]
 
 The following sections will explain how to implement each of the aforementioned options.
 

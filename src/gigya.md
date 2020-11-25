@@ -38,12 +38,12 @@ For proper OwnId functioning, the following fields should be created in the Gigy
 
 | Field Name | Type | Encrypted | Write Access | Required | Nullable | Field purpose |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| pubKey | basic-string | YES | clientCreate | NO | YES | User public key |
-| keyHsh | basic-string | YES | clientCreate | NO | YES | Hash of pubKey for better search performance |
-| fido2CredentialId | basic-string | YES | clientCreate | NO | YES | Allows Fido2 authorisation to function |
-| fido2SignatureCounter | basic-string | YES | clientCreate | NO | YES | Allows Fido2 authorisation to function |
-| recoveryId | basic-string | YES | clientCreate | NO | YES | Connection recovery identifier |
-| recoveryEncData | basic-string | YES | clientCreate | NO | YES | Encrypted connection recovery data |
+| pubKey | basic-string | YES | clientModify | NO | YES | User public key |
+| keyHsh | basic-string | YES | clientModify | NO | YES | Hash of pubKey for better search performance |
+| fido2CredentialId | basic-string | YES | clientModify | NO | YES | Allows Fido2 authorisation to function |
+| fido2SignatureCounter | basic-string | YES | clientModify | NO | YES | Allows Fido2 authorisation to function |
+| recoveryId | basic-string | YES | clientModify | NO | YES | Connection recovery identifier |
+| recoveryEncData | basic-string | YES | clientModify | NO | YES | Encrypted connection recovery data |
 
 You have two options to set up the fields:
 

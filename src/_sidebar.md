@@ -5,6 +5,7 @@
 - [OwnID Integrations](gigya)
 - [Security](security)
 - [Troubleshooting](troubleshooting)
+- [Step by step tutorial](tutorial)
 - **Links**
 - [ownid.com](https://ownid.com)
 - [demo.ownid.com](https://demo.ownid.com)

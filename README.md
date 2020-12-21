@@ -1,10 +1,8 @@
 # OwnID Developer tutorial
-
-## Overview
-
-OwnID Developer tutorial includes demo site and tutorial materials.
-You will find a simple site for OwnID integration under `tutorial` folder.
-
-Use OwnID step by step tutorial to integrate OwnID widgets to the site.
-
-You can find a final version of the site with all integrated OwnID widgets under `demo` folder.
+ 
+## Description
+ 
+The developer tutorial is a step by step guide to integrate OwnID widgets into a demo website. Follow the guidelines here:
+https://docs.ownid.com/tutorial
+ 
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP/ownid-developer-tutorial)](https://api.reuse.software/info/github.com/SAP/ownid-developer-tutorial)
